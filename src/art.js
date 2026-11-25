@@ -270,6 +270,20 @@
         floor("#e9eef3", 200) + [...Array(30)].map((_, i) => `<circle cx="${(i * 71) % 640}" cy="${(i * 37) % 190}" r="2.5" fill="#fff"/>`).join("") + E("🚲", 560, 230, 40) + E("🚌", 80, 228, 50),
       front: () => ""
     },
+    fete: {
+      outfit: null, noCounter: true,
+      back: () => wall("#fdf1e4") + floor("#c9a27a") + `<path d="M0,30 Q80,70 160,30 T320,30 T480,30 T640,30" stroke="#999" stroke-width="2" fill="none"/>` + [...Array(16)].map((_, i) => `<path d="M${i * 40 + 10},${34 + 16 * Math.sin(i * 0.8)} l10,22 l10,-22Z" fill="${["#e0474f", "#f0c419", "#2f9c8a", "#9b4fb0"][i % 4]}"/>`).join("") +
+        E("🎈", 60, 120, 50) + E("🎈", 590, 110, 46) + E("🎉", 560, 190, 34) + `<rect x="210" y="70" width="220" height="40" rx="8" fill="#e0474f"/><text x="320" y="97" font-size="20" font-weight="900" fill="#fff" text-anchor="middle" font-family="Georgia,serif">Félicitations !</text>`,
+      front: () => `<rect x="230" y="200" width="180" height="10" rx="3" fill="#fff" stroke="#ddd"/><rect x="240" y="210" width="8" height="52" fill="#7a5230"/><rect x="392" y="210" width="8" height="52" fill="#7a5230"/>` + E("🎂", 290, 184, 34) + E("🥂", 350, 186, 26) + E("🎁", 390, 188, 26)
+    },
+    spectacle: {
+      outfit: "suit", oc: "#7a1f2b", split: true,
+      back: () => wall("#3a1020") + `<rect x="320" y="0" width="320" height="300" fill="#e2eefb"/>` + floor("#5a2a12") + `<rect x="320" y="245" width="320" height="55" fill="#a9b8c9"/>` +
+        `<path d="M10,0 Q60,120 20,240 L0,240 V0Z M310,0 Q260,120 300,240 L320,240 V0Z" fill="#b3263a"/>` + `<rect x="60" y="20" width="200" height="34" rx="6" fill="#f5d68a"/><text x="160" y="43" font-size="15" font-weight="800" fill="#3a1020" text-anchor="middle">BILLETTERIE</text>` +
+        `<rect x="70" y="62" width="180" height="70" rx="6" fill="#fff"/><text x="160" y="84" font-size="11" text-anchor="middle">Samedi 24 juin</text><text x="160" y="102" font-size="11" text-anchor="middle">Concert · 21 h</text><text x="160" y="120" font-size="11" text-anchor="middle">Dîner · 19 h 30</text>` +
+        `<path d="M320,0 V300" stroke="#fff" stroke-width="6"/>` + win(470, 50, 140, 100, E("🌆", 540, 96, 34)) + E("🛋️", 600, 230, 40),
+      front: () => counter(40, 250, "#7a1f2b", ["🎟️", "☎️", "📒"], 24)
+    },
     // generic fall-backs
     rue: {
       outfit: null, noCounter: true,

@@ -510,3 +510,17 @@ body:not(.no-gc) .ft-m .ftc{color:var(--m)} body:not(.no-gc) .ft-f .ftc{color:va
 .legend .lgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:6px;margin-top:6px;font-size:14px}
 .legend{margin-bottom:16px}
 .map-fig .mapwrap{max-width:680px;margin:0 auto}
+/* family tree, agenda */
+.ftree{display:flex;flex-direction:column;align-items:center;gap:0}
+.fgen{display:flex;flex-wrap:wrap;justify-content:center;gap:18px}
+.fcouple{display:flex;align-items:center;gap:4px;background:var(--bg);border-radius:14px;padding:6px 8px}
+.fperson{display:flex;flex-direction:column;align-items:center;min-width:84px;cursor:pointer;font-size:14px}
+.fperson.me{background:#fff3c4;border-radius:12px;padding:2px 4px;color:#1f2a2b}
+.frel{font-size:12px;font-weight:700;color:var(--accent-2)}
+.fheart{color:#e0474f;font-size:14px}
+.flink{width:3px;height:22px;background:var(--line);margin:2px auto}
+.agenda{display:grid;gap:6px}
+.ag-row{display:grid;grid-template-columns:128px 40px 1fr;gap:10px;align-items:center;border:1px solid var(--line);border-left:5px solid var(--unit);border-radius:12px;padding:6px 10px;cursor:pointer;background:var(--panel)}
+.ag-clock{display:flex;align-items:center;gap:6px}.ag-clock b{font-size:14px;white-space:nowrap}
+.ag-pic{font-size:26px;text-align:center}
+.ckopt{padding:4px}

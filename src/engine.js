@@ -404,6 +404,12 @@
     // identity card, badge, registration form
     form: (s) => ig(s.caption || "", `<div class="idform idf-${s.style || "fiche"}"><div class="idf-head">${esc(s.title)}${s.flag ? ` ${A.flag(s.flag, 26)}` : ""}</div><div class="idf-body">${s.photo ? `<div class="idf-photo">${A.avatar(s.photo, 86)}</div>` : ""}<div class="idf-fields">${s.fields.map(f => `<div class="idf-row" data-say="${esc(f[2] || f[1])}"><span class="idf-l">${esc(f[0])}</span><span class="idf-v">${esc(f[1])}</span></div>`).join("")}</div></div>${s.mrz ? `<div class="idf-mrz">${esc(s.mrz)}</div>` : ""}</div>${s.note ? `<div class="gnote">${tz(s.note)}</div>` : ""}`, "doc-fig")
   });
+  Object.assign(INFO, {
+    // family tree: rows of generations, each person { n: name, k: cast kind, rel: relation to "moi", me: true }
+    tree: (s) => ig(s.title, `<div class="ftree">${s.rows.map((row, ri) => `<div class="fgen">${row.map(grp => `<div class="fcouple">${[].concat(grp).map(p => `<div class="fperson ${p.me ? "me" : ""}" data-say="${esc(p.say || (p.rel ? p.rel + ", " + p.n : p.n))}">${A.avatar(p.k, 58)}<b>${esc(p.n)}</b>${p.rel ? `<span class="frel ${p.g ? "g-" + p.g : ""}">${esc(p.rel)}</span>` : ""}</div>`).join(`<span class="fheart">❤</span>`)}</div>`).join("")}</div>${ri < s.rows.length - 1 ? `<div class="flink"></div>` : ""}`).join("")}</div>${s.note ? `<div class="gnote">${tz(s.note)}</div>` : ""}`),
+    // a day planner: times with clock faces
+    agenda: (s) => ig(s.title, `<div class="agenda">${s.items.map(x => `<div class="ag-row" data-say="${esc(x.say || x.fr)}"><div class="ag-clock">${A.clock(x.h, x.m, 54)}<b>${esc(x.t || timeStr(x.h, x.m))}</b></div><div class="ag-pic">${x.pic || ""}</div><div>${fr(x.fr)}<div class="en">${esc(x.en)}</div></div></div>`).join("")}</div>${s.note ? `<div class="gnote">${tz(s.note)}</div>` : ""}`)
+  });
   function infoEl(spec) { return INFO[spec.type] ? INFO[spec.type](spec) : h(`<div></div>`); }
 
   /* ---------- interactive widgets ---------- */
@@ -587,6 +593,36 @@
     const el = wbox(w.label || "Quelle est la date ? · dates and seasons", `<div class="datecard"><div class="dc-top"></div><div class="dc-num"></div><div class="dc-wd"></div></div><div class="result dc-words" style="font-size:22px;min-height:36px"></div><div class="cap dc-seas" style="text-align:center"></div><div class="row" style="justify-content:center"><button class="btn small" data-a="new">🎲 New date</button><button class="btn small" data-a="today">📅 Today</button><button class="btn small" data-a="hear">🔊 Hear it</button></div>`);
     const draw = (sayIt) => { $(".dc-top", el).textContent = MONTHS[cur.m]; $(".dc-num", el).textContent = cur.d; $(".dc-wd", el).textContent = DAYS[cur.wd]; $(".dc-words", el).innerHTML = fr(words(cur)); const se = SEASONS.find(x => x[3].includes(cur.m)); $(".dc-seas", el).innerHTML = `${se[1]} C'est ${fr(IN[se[0]])}.${cur.d === 1 ? " <span class='muted'>· the 1st is <b>premier</b>; every other day is just the number.</span>" : ""}`; if (sayIt) speak(words(cur)); };
     el.onclick = e => { const b = e.target.closest("[data-a]"); if (!b) return; if (b.dataset.a === "new") { cur = make(); draw(true); } if (b.dataset.a === "today") { const t = new Date(); cur = { m: t.getMonth(), d: t.getDate(), wd: (t.getDay() + 6) % 7 }; draw(true); } if (b.dataset.a === "hear") speak(words(cur)); };
+    draw(false); return el;
+  };
+
+  // everyday (12-hour) time: neuf heures moins le quart, midi et demi…
+  function hourWord(h) { h = ((h % 24) + 24) % 24; if (h === 0) return "minuit"; if (h === 12) return "midi"; const hh = h > 12 ? h - 12 : h; return `${hh === 1 ? "une" : frNum(hh)} heure${hh > 1 ? "s" : ""}`; }
+  function timeInformal(h, m) {
+    if (m === 0) return `Il est ${hourWord(h)}.`;
+    if (m === 15) return `Il est ${hourWord(h)} et quart.`;
+    if (m === 30) return `Il est ${hourWord(h)} et ${(h % 12 === 0) ? "demi" : "demie"}.`;
+    if (m === 45) return `Il est ${hourWord(h + 1)} moins le quart.`;
+    if (m < 30) return `Il est ${hourWord(h)} ${frNum(m).replace(/^un$/, "une").replace(/ et un$/, " et une")}.`;
+    return `Il est ${hourWord(h + 1)} moins ${frNum(60 - m).replace(/^un$/, "une")}.`;
+  }
+  WIDGETS.clock12 = (w) => {
+    const pool = w.times || [[7, 0], [8, 15], [9, 30], [8, 45], [10, 10], [11, 50], [12, 0], [12, 30], [14, 20], [17, 40], [0, 0], [18, 55]];
+    let cur = pool[0], score = 0, tries = 0;
+    const el = wbox(w.label || "Quelle heure est-il ? · everyday time", `<div class="clockrow"><div class="ck"></div><div><div class="ck-big"></div><div class="ck-words"></div><div class="ck-off muted" style="font-size:13px"></div><div class="row" style="margin-top:8px"><button class="btn small" data-a="rand">🎲 New time</button><button class="btn small" data-a="hear">🔊 Hear it</button><button class="btn small" data-a="game">🎧 Which clock?</button></div></div></div><div class="cgame"></div>`);
+    const draw = (sayIt, t = cur) => { cur = t; $(".ck", el).innerHTML = A.clock(t[0], t[1], 120); $(".ck-big", el).textContent = timeStr(t[0], t[1]); $(".ck-words", el).innerHTML = fr(timeInformal(t[0], t[1])); $(".ck-off", el).innerHTML = `official: ${esc(timeWords(t[0], t[1]))}`; if (sayIt) speak(timeInformal(t[0], t[1])); };
+    el.onclick = e => {
+      const b = e.target.closest("[data-a]"); if (!b) return; const a = b.dataset.a;
+      if (a === "rand") draw(true, [Math.floor(Math.random() * 24), [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55][Math.floor(Math.random() * 12)]]);
+      if (a === "hear") speak(timeInformal(cur[0], cur[1]));
+      if (a === "game") {
+        const t = [1 + Math.floor(Math.random() * 11), [0, 15, 30, 45, 10, 50, 20, 40][Math.floor(Math.random() * 8)]];
+        const opts = shuffle([t, [t[0], (t[1] + 30) % 60], [(t[0] % 11) + 1, t[1]], [t[0], 60 - t[1] === 60 ? 15 : 60 - t[1]]].filter((o, i, arr) => arr.findIndex(x => x[0] === o[0] && x[1] === o[1]) === i)).slice(0, 4);
+        const g = $(".cgame", el); g.innerHTML = `<div class="row" style="justify-content:center;margin-top:10px"><button class="play big-play" style="margin:0">▶</button>${opts.map((o, k) => `<button class="tile ckopt" data-o="${k}">${A.clock(o[0], o[1], 70)}</button>`).join("")}</div><div class="gfb" style="text-align:center"></div>`;
+        const say = () => speak(timeInformal(t[0], t[1]), $(".big-play", g)); say(); $(".big-play", g).onclick = say;
+        g.onclick = e2 => { const o = e2.target.closest("[data-o]"); if (!o) return; e2.stopPropagation(); const pick = opts[+o.dataset.o], ok = pick[0] === t[0] && pick[1] === t[1]; tries++; if (ok) score++; o.classList.add(ok ? "ok" : "no"); $(".gfb", g).innerHTML = `${ok ? "✓ Exact !" : "✗"} ${fr(timeInformal(t[0], t[1]))} <span class="muted">· score ${score}/${tries}</span>`; g.onclick = null; };
+      }
+    };
     draw(false); return el;
   };
 
@@ -1020,7 +1056,7 @@
   }
 
   // exposed for the build-time self-test (node)
-  window.FR_HELPERS = { frNum, priceWords, timeWords, contract, artFor, plOf, judge };
+  window.FR_HELPERS = { frNum, priceWords, timeWords, timeInformal, contract, artFor, plOf, judge };
   if (typeof document === "undefined" || !document.body) return;
   if (T) initTest();
   else { renderShell(); updateProgress(); route(); window.addEventListener("hashchange", route); }
