@@ -438,6 +438,29 @@
       return ig(s.title || "🏠 La maison d'être", `<div class="mapwrap">${svg}</div>${s.note ? `<div class="gnote">${tz(s.note)}</div>` : ""}`, "map-fig");
     }
   });
+  const BODY = [
+    ["tete", "la tête", 196, 20, "l", "à la tête", 14], ["yeux", "les yeux", 208, 34, "r", "aux yeux", 12], ["oreille", "l'oreille", 222, 40, "r", "à l'oreille", 40], ["dents", "les dents", 200, 50, "l", "aux dents", 46],
+    ["gorge", "la gorge", 200, 70, "r", "à la gorge"], ["epaule", "l'épaule", 164, 86, "l", "à l'épaule"], ["bras", "le bras", 150, 120, "l", "au bras"], ["dos", "le dos", 222, 112, "r", "au dos"],
+    ["ventre", "le ventre", 200, 140, "r", "au ventre"], ["main", "la main", 140, 168, "l", "à la main"], ["genou", "le genou", 186, 222, "l", "au genou"], ["jambe", "la jambe", 214, 238, "r", "à la jambe"], ["pied", "le pied", 222, 284, "r", "au pied"]
+  ];
+  Object.assign(INFO, {
+    body: (s) => {
+      const fig = `<g fill="#f1c7a1" stroke="#b07a52" stroke-width="2"><circle cx="200" cy="38" r="22"/><rect x="190" y="58" width="20" height="14"/><path d="M168,72 h64 l10,90 h-84z" fill="#6fa8dc"/><path d="M168,74 l-26,96 l12,4 l24,-84z"/><path d="M232,74 l26,96 l-12,4 l-24,-84z"/><path d="M176,160 h22 l-4,128 h-16z" fill="#3a4f8a"/><path d="M202,160 h22 l-2,128 h-16z" fill="#3a4f8a"/><ellipse cx="186" cy="292" rx="12" ry="5"/><ellipse cx="214" cy="292" rx="12" ry="5"/><circle cx="143" cy="174" r="7"/><circle cx="257" cy="174" r="7"/></g><circle cx="192" cy="34" r="2.5" fill="#333"/><circle cx="208" cy="34" r="2.5" fill="#333"/><path d="M193,48 q7,5 14,0" stroke="#a33" stroke-width="2" fill="none"/>`;
+      const marks = BODY.map(([id, name, x, y, side, , ly0]) => { const lx = side === "l" ? 70 : 330, ly = ly0 || y; return `<g class="mplace" data-place="${id}" data-say="${name}"><path d="M${x},${y} L${lx + (side === "l" ? 34 : -34)},${ly}" stroke="#c2508e" stroke-width="1.2" stroke-dasharray="3 2"/><circle cx="${x}" cy="${y}" r="4.5" fill="#c2508e"/><rect x="${lx - 34}" y="${ly - 10}" width="68" height="20" rx="10" fill="#fff" stroke="#c2508e"/><text x="${lx}" y="${ly + 4}" font-size="10.5" font-weight="700" text-anchor="middle" fill="#2b2118">${name}</text></g>`; }).join("");
+      const el = ig(s.title || "🧍 Le corps · tap a body part", `<div class="mapwrap" style="max-width:520px"><svg class="map-svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="#f6f1e7"/>${fig}${marks}</svg></div>${s.quiz !== false ? `<div class="row mquiz"><button class="btn small primary">🎧 J'ai mal où ? · tap where it hurts</button><span class="mq-fb muted"></span></div>` : ""}${s.note ? `<div class="gnote">${tz(s.note)}</div>` : ""}`, "map-fig");
+      if (s.quiz !== false) {
+        let cur = null; const fb = $(".mq-fb", el);
+        $(".mquiz button", el).onclick = () => { cur = BODY[Math.floor(Math.random() * BODY.length)]; fb.innerHTML = `🔊 Listen, then tap. <button class="btn small" data-again>▶ again</button>`; speak(`J'ai mal ${cur[5]}.`); };
+        el.addEventListener("click", e => {
+          if (e.target.closest("[data-again]") && cur) { speak(`J'ai mal ${cur[5]}.`); return; }
+          const pl = e.target.closest(".mplace"); if (!pl || !cur) return; e.stopPropagation();
+          const ok = pl.dataset.place === cur[0];
+          fb.innerHTML = `${ok ? `<span style="color:var(--good)">✓ Oui !</span>` : `<span style="color:var(--bad)">✗ Non : ${esc(cur[1])}.</span>`} <span class="fr" lang="fr">J'ai mal ${esc(cur[5])}.</span>`; cur = null;
+        }, true);
+      }
+      return el;
+    }
+  });
   function infoEl(spec) { return INFO[spec.type] ? INFO[spec.type](spec) : h(`<div></div>`); }
 
   /* ---------- interactive widgets ---------- */

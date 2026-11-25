@@ -34,8 +34,8 @@ Then open `https://humanshado.github.io/FrenchDialogues/`. You can also open `do
 
 ```
 src/engine.js          lesson engine (all tabs, quizzes, widgets, infographics, tests)
-src/art.js             SVG illustration library: characters (adults and children), 25 scene backdrops,
-                       drawn flags, street plans with routes, transit diagrams, mini-diagrams, clock, money
+src/art.js             SVG illustration library: characters (adults and children), 29 scene backdrops (doctor, pharmacy, lecture theatre, motorway…),
+                       drawn flags, a tappable body diagram, street and campus plans with routes, transit diagrams, mini-diagrams, clock, money
 src/style.css          shared styles
 src/lessons/u00.js     unit content (one file per unit)
 src/tests/e1-test.js   étape tests (e1 = units 0–2, e2 = units 3–4…)
@@ -57,10 +57,10 @@ Scenes in `art.js`: appartement, aeroport, plage, fete, spectacle, classe, train
 - [x] Étape 2 · Consommer: Unité 3 *Qu'est-ce qu'on mange ?*, Unité 4 *Les soldes, c'est parti !* (book pp. 47–74) + bilan
 - [x] Étape 3 · Le quotidien: Unité 5 *C'est quoi le programme ?*, Unité 6 *Félicitations !* (book pp. 75–102) + bilan
 - [x] Étape 4 · Chez soi, en voyage: Unité 7 *Chez moi*, Unité 8 *Bonnes vacances !* (book pp. 103–130) + bilan
-- [ ] Étape 5 · Santé, études, travail: Unités 9–10
+- [x] Étape 5 · Santé, études, travail: Unités 9–10 (Pas de chance !, Beau travail !) + bilan
 - [ ] Étape 6 · Nature et projets: Unités 11–12
 
-So far: 44 dialogues, 597 words, 323 activities, 4 étape tests.
+So far: 54 dialogues, 712 words, 391 activities, 5 étape tests.
 
 ## Notes
 

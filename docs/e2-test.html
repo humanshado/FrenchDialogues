@@ -1827,6 +1827,7 @@ window.TEST = {
     if (o.outfit === "vest") p.push(`<path d="M-30,-90 L-30,-140 Q-30,-153 -17,-153 L-6,-153 L0,-115 L0,-90Z M30,-90 L30,-140 Q30,-153 17,-153 L6,-153 L0,-115 L0,-90Z" fill="${o.oc || "#222"}"/><path d="M-4,-150 L4,-150 L0,-142Z" fill="#222"/>`);
     if (o.outfit === "suit") p.push(`<path d="M-30,-90 L-30,-140 Q-30,-153 -17,-153 L-8,-153 L0,-112 L0,-90Z M30,-90 L30,-140 Q30,-153 17,-153 L8,-153 L0,-112 L0,-90Z" fill="${o.oc || "#2c3e50"}"/><path d="M-3,-152 L3,-152 L5,-120 L0,-114 L-5,-120Z" fill="#c0392b"/>`);
     if (o.outfit === "uniform") p.push(`<path d="M-10,-153 L0,-140 L10,-153" fill="none" stroke="#fff" stroke-width="3"/><rect x="10" y="-138" width="12" height="8" rx="2" fill="#ffcd00"/>`);
+    if (o.outfit === "coat") p.push(`<path d="M-32,-60 L-30,-140 Q-30,-153 -17,-153 L-6,-153 L0,-120 L6,-153 L17,-153 Q30,-153 30,-140 L32,-60Z" fill="#fdfdfd" stroke="rgba(0,0,0,.18)"/><path d="M-8,-150 Q-14,-120 0,-112 Q14,-120 8,-150" fill="none" stroke="#2f6db5" stroke-width="2.5"/><circle cx="0" cy="-110" r="4" fill="#2f6db5"/>`);
     if (o.outfit === "apron") p.push(`<path d="M-21,-140 L21,-140 L26,-60 L-26,-60Z" fill="${o.oc || "#fff"}" stroke="rgba(0,0,0,.12)"/><path d="M-21,-140 L-10,-153 M21,-140 L10,-153" stroke="${o.oc || "#fff"}" stroke-width="3"/><rect x="-11" y="-112" width="22" height="12" rx="2" fill="rgba(0,0,0,.08)"/>`);
     if (o.outfit === "coat") p.push(`<path d="M-31,-62 L-31,-140 Q-31,-153 -17,-153 L-6,-153 L0,-120 L6,-153 L17,-153 Q31,-153 31,-140 L31,-62Z" fill="${o.oc || "#8a6d4b"}"/><circle cx="0" cy="-104" r="2" fill="#333"/><circle cx="0" cy="-88" r="2" fill="#333"/>`);
     // arms + hands
@@ -2076,6 +2077,30 @@ window.TEST = {
     plage: {
       outfit: null, noCounter: true,
       back: () => `<rect width="640" height="300" fill="#bfe3f5"/>` + E("☀️", 580, 40, 40) + `<rect x="0" y="120" width="640" height="60" fill="#3a9bd5"/><path d="M0,130 q40,-8 80,0 t80,0 t80,0 t80,0 t80,0 t80,0 t80,0 t80,0" stroke="#fff" stroke-width="2" fill="none" opacity=".7"/>` + floor("#f2dca6", 175) + E("⛵", 120, 120, 34) + E("⛱️", 560, 200, 60) + E("🏐", 80, 240, 26) + E("🐚", 300, 280, 20),
+      front: () => ""
+    },
+    medecin: {
+      outfit: "coat", oc: "#ffffff", clientSit: true,
+      back: () => wall("#eef6f4") + floor("#c7d3cf") + `<rect x="40" y="50" width="120" height="150" rx="6" fill="#fff" stroke="#9bb"/><text x="100" y="72" font-size="11" font-weight="800" text-anchor="middle" fill="#2f9c8a">Dr Martin</text><text x="100" y="88" font-size="9" text-anchor="middle">médecin généraliste</text>` + [0, 1, 2, 3, 4].map(i => `<rect x="${60 + i * 16}" y="${110 + i * 14}" width="${80 - i * 16}" height="8" fill="#333" opacity="${0.15 + i * 0.12}"/>`).join("") +
+        win(470, 50, 130, 90, E("🌳", 535, 96, 36)) + E("🩺", 330, 120, 30) + `<rect x="250" y="70" width="40" height="60" fill="#fff" stroke="#ccc"/><text x="270" y="96" font-size="22" text-anchor="middle">⚕️</text>`,
+      front: () => `<rect x="60" y="196" width="230" height="12" rx="4" fill="#a0703c"/><rect x="70" y="208" width="8" height="54" fill="#7a5230"/><rect x="272" y="208" width="8" height="54" fill="#7a5230"/>` + E("📋", 120, 186, 24) + E("💻", 240, 184, 26)
+    },
+    pharmacie: {
+      outfit: "coat", oc: "#ffffff",
+      back: () => wall("#f2f8f2") + floor("#cfd8cf") + `<rect x="250" y="16" width="140" height="40" rx="6" fill="#2f8a4f"/><text x="320" y="44" font-size="20" font-weight="900" fill="#fff" text-anchor="middle">✚ PHARMACIE</text>` +
+        shelf(380, 80, 240, ["💊", "🧴", "🩹", "🌡️", "🧴"], 24, "#9bb") + shelf(380, 135, 240, ["🍯", "💊", "🧼", "🩹", "💊"], 24, "#9bb") + shelf(380, 190, 240, ["🧸", "🍼", "🧴", "😷", "💊"], 24, "#9bb"),
+      front: () => counter(40, 260, "#2f8a4f", ["📋", "💊", "💳"], 22)
+    },
+    amphi: {
+      outfit: "suit", oc: "#3a4f8a", noCounter: true,
+      back: () => wall("#efe9df") + floor("#a77b55") + `<rect x="160" y="30" width="320" height="120" rx="4" fill="#fff" stroke="#888"/><text x="320" y="62" font-size="18" font-weight="800" text-anchor="middle" fill="#3a4f8a">Économie · Master 1</text><text x="320" y="92" font-size="13" text-anchor="middle">Cours magistral · Amphi B</text><path d="M200,120 L260,100 L320,110 L380,80 L440,90" stroke="#e0474f" stroke-width="3" fill="none"/>` +
+        [0, 1, 2].map(i => `<rect x="${20 + i * 10}" y="${170 + i * 22}" width="${600 - i * 20}" height="14" fill="#7a5230" opacity="${0.6 - i * 0.12}"/>`).join(""),
+      front: () => ""
+    },
+    route: {
+      outfit: "uniform", noCounter: true,
+      back: () => `<rect width="640" height="300" fill="#cfe9f7"/>` + `<path d="M0,170 q160,-50 320,-20 t320,-30 V300 H0Z" fill="#9ccf7f"/>` + `<rect x="0" y="210" width="640" height="90" fill="#5c5c5c"/><path d="M0,255 H640" stroke="#fff" stroke-width="4" stroke-dasharray="40 30"/>` +
+        E("🚗", 470, 230, 70) + `<path d="M560,236 l14,-26 l14,26z" fill="#e0474f" stroke="#fff" stroke-width="2"/>` + E("💨", 420, 205, 26) + E("🌳", 80, 165, 50) + E("🌳", 600, 150, 40),
       front: () => ""
     },
     // generic fall-backs
@@ -2672,6 +2697,29 @@ window.TEST = {
       const V = [["naître", "né(e)", "👶", 40, 222], ["mourir", "mort(e)", "🕯️", 360, 222], ["arriver", "arrivé(e)", "🧳", 40, 150], ["partir", "parti(e)", "🛫", 360, 150], ["entrer", "entré(e)", "🚪", 140, 232], ["sortir", "sorti(e)", "🏃", 262, 232], ["monter", "monté(e)", "⬆️", 120, 128], ["descendre", "descendu(e)", "⬇️", 280, 128], ["rester", "resté(e)", "🛋️", 200, 162], ["tomber", "tombé(e)", "🍂", 316, 70], ["venir", "venu(e)", "👋", 80, 72], ["aller", "allé(e)", "➡️", 200, 22], ["passer", "passé(e)", "🚶", 40, 22], ["retourner", "retourné(e)", "🔁", 360, 22]];
       const svg = `<svg class="map-svg etre-svg" viewBox="0 0 400 260"><rect width="400" height="260" fill="#eef6ff"/><path d="M90,110 L200,45 L310,110Z" fill="#e0474f"/><rect x="105" y="110" width="190" height="135" fill="#fff4e0" stroke="#7a5230" stroke-width="3"/><rect x="180" y="185" width="40" height="60" fill="#a0703c"/><rect x="125" y="125" width="40" height="34" fill="#bfe3f5" stroke="#7a5230"/><rect x="235" y="125" width="40" height="34" fill="#bfe3f5" stroke="#7a5230"/><text x="200" y="100" font-size="13" font-weight="900" text-anchor="middle" fill="#fff">ÊTRE</text>${V.map(v => `<g class="mplace" data-say="${v[0]} : il est ${v[1].replace("(e)", "")}" transform="translate(${v[3]},${v[4]})"><rect x="-42" y="-16" width="86" height="32" rx="9" fill="#fff" stroke="#9b4fb0" stroke-width="2"/><text x="-22" y="1" font-size="14" text-anchor="middle" dominant-baseline="central">${v[2]}</text><text x="11" y="-4" font-size="9.5" font-weight="800" text-anchor="middle" fill="#2b2118">${v[0]}</text><text x="11" y="8" font-size="8.5" text-anchor="middle" fill="#9b4fb0">${v[1]}</text></g>`).join("")}</svg>`;
       return ig(s.title || "🏠 La maison d'être", `<div class="mapwrap">${svg}</div>${s.note ? `<div class="gnote">${tz(s.note)}</div>` : ""}`, "map-fig");
+    }
+  });
+  const BODY = [
+    ["tete", "la tête", 196, 20, "l", "à la tête", 14], ["yeux", "les yeux", 208, 34, "r", "aux yeux", 12], ["oreille", "l'oreille", 222, 40, "r", "à l'oreille", 40], ["dents", "les dents", 200, 50, "l", "aux dents", 46],
+    ["gorge", "la gorge", 200, 70, "r", "à la gorge"], ["epaule", "l'épaule", 164, 86, "l", "à l'épaule"], ["bras", "le bras", 150, 120, "l", "au bras"], ["dos", "le dos", 222, 112, "r", "au dos"],
+    ["ventre", "le ventre", 200, 140, "r", "au ventre"], ["main", "la main", 140, 168, "l", "à la main"], ["genou", "le genou", 186, 222, "l", "au genou"], ["jambe", "la jambe", 214, 238, "r", "à la jambe"], ["pied", "le pied", 222, 284, "r", "au pied"]
+  ];
+  Object.assign(INFO, {
+    body: (s) => {
+      const fig = `<g fill="#f1c7a1" stroke="#b07a52" stroke-width="2"><circle cx="200" cy="38" r="22"/><rect x="190" y="58" width="20" height="14"/><path d="M168,72 h64 l10,90 h-84z" fill="#6fa8dc"/><path d="M168,74 l-26,96 l12,4 l24,-84z"/><path d="M232,74 l26,96 l-12,4 l-24,-84z"/><path d="M176,160 h22 l-4,128 h-16z" fill="#3a4f8a"/><path d="M202,160 h22 l-2,128 h-16z" fill="#3a4f8a"/><ellipse cx="186" cy="292" rx="12" ry="5"/><ellipse cx="214" cy="292" rx="12" ry="5"/><circle cx="143" cy="174" r="7"/><circle cx="257" cy="174" r="7"/></g><circle cx="192" cy="34" r="2.5" fill="#333"/><circle cx="208" cy="34" r="2.5" fill="#333"/><path d="M193,48 q7,5 14,0" stroke="#a33" stroke-width="2" fill="none"/>`;
+      const marks = BODY.map(([id, name, x, y, side, , ly0]) => { const lx = side === "l" ? 70 : 330, ly = ly0 || y; return `<g class="mplace" data-place="${id}" data-say="${name}"><path d="M${x},${y} L${lx + (side === "l" ? 34 : -34)},${ly}" stroke="#c2508e" stroke-width="1.2" stroke-dasharray="3 2"/><circle cx="${x}" cy="${y}" r="4.5" fill="#c2508e"/><rect x="${lx - 34}" y="${ly - 10}" width="68" height="20" rx="10" fill="#fff" stroke="#c2508e"/><text x="${lx}" y="${ly + 4}" font-size="10.5" font-weight="700" text-anchor="middle" fill="#2b2118">${name}</text></g>`; }).join("");
+      const el = ig(s.title || "🧍 Le corps · tap a body part", `<div class="mapwrap" style="max-width:520px"><svg class="map-svg" viewBox="0 0 400 300"><rect width="400" height="300" fill="#f6f1e7"/>${fig}${marks}</svg></div>${s.quiz !== false ? `<div class="row mquiz"><button class="btn small primary">🎧 J'ai mal où ? · tap where it hurts</button><span class="mq-fb muted"></span></div>` : ""}${s.note ? `<div class="gnote">${tz(s.note)}</div>` : ""}`, "map-fig");
+      if (s.quiz !== false) {
+        let cur = null; const fb = $(".mq-fb", el);
+        $(".mquiz button", el).onclick = () => { cur = BODY[Math.floor(Math.random() * BODY.length)]; fb.innerHTML = `🔊 Listen, then tap. <button class="btn small" data-again>▶ again</button>`; speak(`J'ai mal ${cur[5]}.`); };
+        el.addEventListener("click", e => {
+          if (e.target.closest("[data-again]") && cur) { speak(`J'ai mal ${cur[5]}.`); return; }
+          const pl = e.target.closest(".mplace"); if (!pl || !cur) return; e.stopPropagation();
+          const ok = pl.dataset.place === cur[0];
+          fb.innerHTML = `${ok ? `<span style="color:var(--good)">✓ Oui !</span>` : `<span style="color:var(--bad)">✗ Non : ${esc(cur[1])}.</span>`} <span class="fr" lang="fr">J'ai mal ${esc(cur[5])}.</span>`; cur = null;
+        }, true);
+      }
+      return el;
     }
   });
   function infoEl(spec) { return INFO[spec.type] ? INFO[spec.type](spec) : h(`<div></div>`); }

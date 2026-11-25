@@ -51,6 +51,7 @@
     if (o.outfit === "vest") p.push(`<path d="M-30,-90 L-30,-140 Q-30,-153 -17,-153 L-6,-153 L0,-115 L0,-90Z M30,-90 L30,-140 Q30,-153 17,-153 L6,-153 L0,-115 L0,-90Z" fill="${o.oc || "#222"}"/><path d="M-4,-150 L4,-150 L0,-142Z" fill="#222"/>`);
     if (o.outfit === "suit") p.push(`<path d="M-30,-90 L-30,-140 Q-30,-153 -17,-153 L-8,-153 L0,-112 L0,-90Z M30,-90 L30,-140 Q30,-153 17,-153 L8,-153 L0,-112 L0,-90Z" fill="${o.oc || "#2c3e50"}"/><path d="M-3,-152 L3,-152 L5,-120 L0,-114 L-5,-120Z" fill="#c0392b"/>`);
     if (o.outfit === "uniform") p.push(`<path d="M-10,-153 L0,-140 L10,-153" fill="none" stroke="#fff" stroke-width="3"/><rect x="10" y="-138" width="12" height="8" rx="2" fill="#ffcd00"/>`);
+    if (o.outfit === "coat") p.push(`<path d="M-32,-60 L-30,-140 Q-30,-153 -17,-153 L-6,-153 L0,-120 L6,-153 L17,-153 Q30,-153 30,-140 L32,-60Z" fill="#fdfdfd" stroke="rgba(0,0,0,.18)"/><path d="M-8,-150 Q-14,-120 0,-112 Q14,-120 8,-150" fill="none" stroke="#2f6db5" stroke-width="2.5"/><circle cx="0" cy="-110" r="4" fill="#2f6db5"/>`);
     if (o.outfit === "apron") p.push(`<path d="M-21,-140 L21,-140 L26,-60 L-26,-60Z" fill="${o.oc || "#fff"}" stroke="rgba(0,0,0,.12)"/><path d="M-21,-140 L-10,-153 M21,-140 L10,-153" stroke="${o.oc || "#fff"}" stroke-width="3"/><rect x="-11" y="-112" width="22" height="12" rx="2" fill="rgba(0,0,0,.08)"/>`);
     if (o.outfit === "coat") p.push(`<path d="M-31,-62 L-31,-140 Q-31,-153 -17,-153 L-6,-153 L0,-120 L6,-153 L17,-153 Q31,-153 31,-140 L31,-62Z" fill="${o.oc || "#8a6d4b"}"/><circle cx="0" cy="-104" r="2" fill="#333"/><circle cx="0" cy="-88" r="2" fill="#333"/>`);
     // arms + hands
@@ -300,6 +301,30 @@
     plage: {
       outfit: null, noCounter: true,
       back: () => `<rect width="640" height="300" fill="#bfe3f5"/>` + E("☀️", 580, 40, 40) + `<rect x="0" y="120" width="640" height="60" fill="#3a9bd5"/><path d="M0,130 q40,-8 80,0 t80,0 t80,0 t80,0 t80,0 t80,0 t80,0 t80,0" stroke="#fff" stroke-width="2" fill="none" opacity=".7"/>` + floor("#f2dca6", 175) + E("⛵", 120, 120, 34) + E("⛱️", 560, 200, 60) + E("🏐", 80, 240, 26) + E("🐚", 300, 280, 20),
+      front: () => ""
+    },
+    medecin: {
+      outfit: "coat", oc: "#ffffff", clientSit: true,
+      back: () => wall("#eef6f4") + floor("#c7d3cf") + `<rect x="40" y="50" width="120" height="150" rx="6" fill="#fff" stroke="#9bb"/><text x="100" y="72" font-size="11" font-weight="800" text-anchor="middle" fill="#2f9c8a">Dr Martin</text><text x="100" y="88" font-size="9" text-anchor="middle">médecin généraliste</text>` + [0, 1, 2, 3, 4].map(i => `<rect x="${60 + i * 16}" y="${110 + i * 14}" width="${80 - i * 16}" height="8" fill="#333" opacity="${0.15 + i * 0.12}"/>`).join("") +
+        win(470, 50, 130, 90, E("🌳", 535, 96, 36)) + E("🩺", 330, 120, 30) + `<rect x="250" y="70" width="40" height="60" fill="#fff" stroke="#ccc"/><text x="270" y="96" font-size="22" text-anchor="middle">⚕️</text>`,
+      front: () => `<rect x="60" y="196" width="230" height="12" rx="4" fill="#a0703c"/><rect x="70" y="208" width="8" height="54" fill="#7a5230"/><rect x="272" y="208" width="8" height="54" fill="#7a5230"/>` + E("📋", 120, 186, 24) + E("💻", 240, 184, 26)
+    },
+    pharmacie: {
+      outfit: "coat", oc: "#ffffff",
+      back: () => wall("#f2f8f2") + floor("#cfd8cf") + `<rect x="250" y="16" width="140" height="40" rx="6" fill="#2f8a4f"/><text x="320" y="44" font-size="20" font-weight="900" fill="#fff" text-anchor="middle">✚ PHARMACIE</text>` +
+        shelf(380, 80, 240, ["💊", "🧴", "🩹", "🌡️", "🧴"], 24, "#9bb") + shelf(380, 135, 240, ["🍯", "💊", "🧼", "🩹", "💊"], 24, "#9bb") + shelf(380, 190, 240, ["🧸", "🍼", "🧴", "😷", "💊"], 24, "#9bb"),
+      front: () => counter(40, 260, "#2f8a4f", ["📋", "💊", "💳"], 22)
+    },
+    amphi: {
+      outfit: "suit", oc: "#3a4f8a", noCounter: true,
+      back: () => wall("#efe9df") + floor("#a77b55") + `<rect x="160" y="30" width="320" height="120" rx="4" fill="#fff" stroke="#888"/><text x="320" y="62" font-size="18" font-weight="800" text-anchor="middle" fill="#3a4f8a">Économie · Master 1</text><text x="320" y="92" font-size="13" text-anchor="middle">Cours magistral · Amphi B</text><path d="M200,120 L260,100 L320,110 L380,80 L440,90" stroke="#e0474f" stroke-width="3" fill="none"/>` +
+        [0, 1, 2].map(i => `<rect x="${20 + i * 10}" y="${170 + i * 22}" width="${600 - i * 20}" height="14" fill="#7a5230" opacity="${0.6 - i * 0.12}"/>`).join(""),
+      front: () => ""
+    },
+    route: {
+      outfit: "uniform", noCounter: true,
+      back: () => `<rect width="640" height="300" fill="#cfe9f7"/>` + `<path d="M0,170 q160,-50 320,-20 t320,-30 V300 H0Z" fill="#9ccf7f"/>` + `<rect x="0" y="210" width="640" height="90" fill="#5c5c5c"/><path d="M0,255 H640" stroke="#fff" stroke-width="4" stroke-dasharray="40 30"/>` +
+        E("🚗", 470, 230, 70) + `<path d="M560,236 l14,-26 l14,26z" fill="#e0474f" stroke="#fff" stroke-width="2"/>` + E("💨", 420, 205, 26) + E("🌳", 80, 165, 50) + E("🌳", 600, 150, 40),
       front: () => ""
     },
     // generic fall-backs
