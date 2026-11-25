@@ -1403,6 +1403,33 @@ LESSONS.push({
         E("🚗", 470, 230, 70) + `<path d="M560,236 l14,-26 l14,26z" fill="#e0474f" stroke="#fff" stroke-width="2"/>` + E("💨", 420, 205, 26) + E("🌳", 80, 165, 50) + E("🌳", 600, 150, 40),
       front: () => ""
     },
+    campagne: {
+      outfit: null, noCounter: true,
+      back: () => `<rect width="640" height="300" fill="#cfe9f7"/>` + E("☀️", 590, 40, 34) + `<path d="M0,150 q120,-60 260,-20 t380,-30 V300 H0Z" fill="#a8d57f"/><path d="M0,190 q200,-40 380,-6 t260,-10 V300 H0Z" fill="#8cc463"/>` +
+        [0, 1, 2, 3].map(i => `<path d="M${60 + i * 150},${190 - i * 4} l120,-8" stroke="#c9b26a" stroke-width="10" opacity=".7"/>`).join("") +
+        `<rect x="470" y="104" width="90" height="60" fill="#c4553b"/><path d="M460,106 L515,70 L570,106Z" fill="#7a3324"/><rect x="505" y="132" width="20" height="32" fill="#5a2a12"/>` + E("🐄", 140, 200, 40) + E("🐑", 230, 214, 30) + E("🌳", 60, 150, 54) + E("🌻", 340, 236, 26) + E("🚜", 400, 196, 40) + floor("#b59a6a", 262),
+      front: () => ""
+    },
+    montagne: {
+      outfit: null, noCounter: true,
+      back: () => `<rect width="640" height="300" fill="#d4ecfa"/>` + `<path d="M-20,220 L140,50 L260,180 L380,30 L560,200 L660,110 V300 H-20Z" fill="#7f97b0"/><path d="M110,82 L140,50 L172,86 L156,80 L140,92 L126,82Z M350,62 L380,30 L414,68 L396,62 L380,74 L364,64Z" fill="#fff"/>` +
+        `<path d="M0,230 q160,-30 320,-6 t320,-12 V300 H0Z" fill="#7fbf6a"/>` + [40, 100, 520, 590].map(x => E("🌲", x, 200, 40)).join("") + E("🐐", 250, 236, 30) + E("🏠", 470, 220, 34) + E("⛷️", 300, 160, 24) + floor("#9a8a6a", 268),
+      front: () => ""
+    },
+    jardin: {
+      outfit: "apron", oc: "#4f8a3f", noCounter: true,
+      back: () => `<rect width="640" height="300" fill="#d6eef9"/>` + E("☀️", 600, 34, 28) + `<rect x="0" y="70" width="640" height="90" fill="#cfb08a"/>` + [0, 1, 2, 3, 4, 5].map(i => win(20 + i * 104, 84, 56, 50)).join("") +
+        `<rect x="0" y="160" width="640" height="140" fill="#8a6a45"/>` + [0, 1, 2].map(r => `<rect x="${20 + r * 210}" y="178" width="180" height="60" rx="6" fill="#6b4e2e" stroke="#a0703c" stroke-width="5"/>` + [0, 1, 2, 3].map(i => E(["🥬", "🍅", "🥕", "🌷"][(i + r) % 4], 44 + r * 210 + i * 42, 212, 24)).join("")).join("") +
+        `<rect x="250" y="120" width="140" height="32" rx="4" fill="#4f8a3f"/><text x="320" y="142" font-size="15" font-weight="800" fill="#fff" text-anchor="middle">JARDIN PARTAGÉ</text>` + E("🪣", 600, 264, 24),
+      front: () => ""
+    },
+    kiosque: {
+      outfit: "vest", oc: "#2b5f8a",
+      back: () => `<rect width="640" height="300" fill="#cfe5f2"/>` + `<rect x="180" y="20" width="280" height="40" rx="4" fill="#2b5f8a"/><text x="320" y="47" font-size="20" font-weight="900" fill="#fff" text-anchor="middle" letter-spacing="2">KIOSQUE · PRESSE</text>` + floor("#b9b1a5") +
+        [0, 1, 2].map(r => `<rect x="380" y="${74 + r * 56}" width="240" height="6" fill="#5a4030"/>` + [0, 1, 2, 3, 4].map(i => `<rect x="${388 + i * 46}" y="${36 + r * 56 + 22}" width="38" height="16" fill="${["#e0474f", "#2f9c8a", "#f0c419", "#9b4fb0", "#2b5f8a"][(i + r) % 5]}" transform="skewX(-4)"/>`).join("")).join("") +
+        `<text x="500" y="250" font-size="11" fill="#333" text-anchor="middle">magazines · journaux · BD</text>`,
+      front: () => counter(40, 260, "#2b5f8a", ["📰", "🗞️", "🪙"], 22)
+    },
     // generic fall-backs
     rue: {
       outfit: null, noCounter: true,
@@ -1582,7 +1609,7 @@ LESSONS.push({
   const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const BOOK = "Édito A1 · Méthode de français";
-  const RUB = { 1: "Premiers pas", 2: "Vivre en ville", 3: "Le quotidien", 4: "La famille et la maison", 5: "Voyages et santé", 6: "Études, travail, société" };
+  const RUB = { 1: "Premiers contacts", 2: "Consommer", 3: "Le quotidien", 4: "Chez soi, en voyage", 5: "Santé, études, travail", 6: "Nature et projets" };
   const UCOL = ["#c2508e", "#4f9d4f", "#9b4fb0", "#7d9a2e", "#e0474f", "#2f9c8a", "#e86a2e", "#4f9d4f", "#9b4fb0", "#7d9a2e", "#e0474f", "#2f9c8a", "#e86a2e"];
   const ucol = n => UCOL[n] || "#0f7b6c";
 
@@ -2343,6 +2370,7 @@ LESSONS.push({
       if (it.type === "type") return typeQ(body, it, finish);
       let head = "", opts = it.options, answer = it.answer;
       if (it.type === "tf") { opts = ["Vrai", "Faux"]; answer = it.ok ? 0 : 1; head = `<div class="qtext">Vrai ou faux ? <span class="muted" style="font-weight:400">${esc(it.q || "")}</span></div><div class="qsentence">${fr(it.s)} ${playBtn(it.s)}</div>${it.en ? `<div class="en" style="text-align:center">${esc(it.en)}</div>` : ""}`; }
+      if (it.type !== "tf" && !it.keepOrder) { const idx = shuffle(opts.map((_, j) => j)); opts = idx.map(j => opts[j]); answer = idx.indexOf(answer); }
       if (it.type === "mcq") head = `${it.pic ? `<div class="qpic">${it.pic}</div>` : ""}<div class="qtext">${tz(esc(it.q).replace(/\[\[([^\]]+)\]\]/g, "[[$1]]"))}</div>`;
       if (it.type === "fill") { const [a, b = ""] = it.sentence.split("___"); head = `<div class="qtext">${esc(it.q || "Complétez · fill in the blank")}</div><div class="qsentence"><span class="fr">${esc(a)}<span class="blank">?</span>${esc(b)}</span></div>${it.en ? `<div class="en" style="text-align:center">${esc(it.en)}</div>` : ""}`; }
       if (it.type === "reply") head = `<div class="qtext">${esc(it.q || "Choose the best reply")}</div><div class="qsentence">${fr(it.prompt)} ${playBtn(it.prompt)}</div>${it.en ? `<div class="en" style="text-align:center">${esc(it.en)}</div>` : ""}`;
@@ -2540,6 +2568,7 @@ LESSONS.push({
     };
     const markTiles = (el, i, a, p) => el.querySelectorAll(`[data-i="${i}"]`).forEach((x, j) => { if (j === a) x.classList.add("ok"); else if (j === p) x.classList.add("no"); });
 
+    const mixSec = (sec) => Object.assign({}, sec, { items: sec.items.map(it => { const idx = shuffle(it.o.map((_, j) => j)); return Object.assign({}, it, { o: idx.map(j => it.o[j]), a: idx.indexOf(it.a) }); }) });
     const W = {};
     W.match = (sec) => {
       const bs = shuffle(sec.items.map(x => x.b));
@@ -2553,6 +2582,7 @@ LESSONS.push({
       } };
     };
     W.dialogue = (sec) => {
+      sec = mixSec(sec);
       const el = h(`<ol class="titems">${sec.items.map((it, i) => `<li><div class="mini">${it.lines.map(([who, txt]) => `<div><b>${esc(who)} :</b> ${txt === "___" ? `<span class="blank" data-b="${i}">……</span>` : fr(txt)}</div>`).join("")}</div><div class="opts" style="margin-top:6px">${it.o.map((o, j) => `<button class="tile opt-l" data-i="${i}" data-j="${j}">${"abc"[j]}. ${esc(o)}</button>`).join("")}</div><div class="fb"></div></li>`).join("")}</ol>`);
       const P = pickTiles(sec, el, (i, j) => { el.querySelector(`[data-b="${i}"]`).textContent = sec.items[i].o[j]; speak(sec.items[i].o[j]); });
       return { el, check() {
@@ -2585,6 +2615,7 @@ LESSONS.push({
       } };
     };
     W.choose = (sec) => {
+      sec = mixSec(sec);
       const el = h(`<ol class="titems">${sec.items.map((it, i) => `<li><div class="row" style="justify-content:space-between"><span class="qsent"><b>${esc(it.s)}</b>${it.en ? ` <span class="muted">(${esc(it.en)})</span>` : ""}</span><span class="row">${it.o.map((o, j) => `<button class="tile" data-i="${i}" data-j="${j}">${"abcd"[j]}) ${esc(o)}</button>`).join("")}</span></div><div class="fb"></div></li>`).join("")}</ol>`);
       const P = pickTiles(sec, el, (i, j) => speak(sec.items[i].o[j]));
       return { el, check() {
@@ -2594,7 +2625,20 @@ LESSONS.push({
         return { score: sc * sec.marks / sec.items.length, wrong };
       } };
     };
-    const SECNAME = { match: "Associez", dialogue: "Complétez le dialogue", type: "Écrivez", tf: "Vrai ou faux", choose: "Choisissez" };
+    W.listen = (sec) => {
+      sec = mixSec(sec);
+      const el = h(`<ol class="titems">${sec.items.map((it, i) => `<li><div class="row" style="gap:8px;align-items:center"><button class="btn small" data-play="${i}">▶ Écouter</button><b>${esc(it.q)}</b></div><div class="opts" style="margin-top:6px">${it.o.map((o, j) => `<button class="tile opt-l" data-i="${i}" data-j="${j}">${"abcd"[j]}. ${esc(o)}</button>`).join("")}</div><div class="fb"></div></li>`).join("")}</ol>`);
+      const heard = {};
+      el.addEventListener("click", e => { const b = e.target.closest("[data-play]"); if (!b) return; const i = +b.dataset.play; heard[i] = (heard[i] || 0) + 1; speak(sec.items[i].say); if (heard[i] >= 2) b.textContent = "▶ Écouter encore"; });
+      const P = pickTiles(sec, el);
+      return { el, check() {
+        P.lock(); let sc = 0; const wrong = [];
+        sec.items.forEach((it, i) => { const ok = P.pick[i] === it.a; if (ok) sc++; else wrong.push({ lesson: it.lesson, area: "dialogues" });
+          markTiles(el, i, it.a, P.pick[i]); el.querySelectorAll("li > .fb")[i].innerHTML = `${fbLine(ok, it.o[it.a], it.why)}<div class="muted" style="margin-top:4px">📝 ${fr(it.say)}</div>`; });
+        return { score: sc * sec.marks / sec.items.length, wrong };
+      } };
+    };
+    const SECNAME = { listen: "Écoutez", match: "Associez", dialogue: "Complétez le dialogue", type: "Écrivez", tf: "Vrai ou faux", choose: "Choisissez" };
 
     const views = {};
     views.book = (m) => {

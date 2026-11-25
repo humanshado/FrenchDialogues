@@ -327,6 +327,33 @@
         E("🚗", 470, 230, 70) + `<path d="M560,236 l14,-26 l14,26z" fill="#e0474f" stroke="#fff" stroke-width="2"/>` + E("💨", 420, 205, 26) + E("🌳", 80, 165, 50) + E("🌳", 600, 150, 40),
       front: () => ""
     },
+    campagne: {
+      outfit: null, noCounter: true,
+      back: () => `<rect width="640" height="300" fill="#cfe9f7"/>` + E("☀️", 590, 40, 34) + `<path d="M0,150 q120,-60 260,-20 t380,-30 V300 H0Z" fill="#a8d57f"/><path d="M0,190 q200,-40 380,-6 t260,-10 V300 H0Z" fill="#8cc463"/>` +
+        [0, 1, 2, 3].map(i => `<path d="M${60 + i * 150},${190 - i * 4} l120,-8" stroke="#c9b26a" stroke-width="10" opacity=".7"/>`).join("") +
+        `<rect x="470" y="104" width="90" height="60" fill="#c4553b"/><path d="M460,106 L515,70 L570,106Z" fill="#7a3324"/><rect x="505" y="132" width="20" height="32" fill="#5a2a12"/>` + E("🐄", 140, 200, 40) + E("🐑", 230, 214, 30) + E("🌳", 60, 150, 54) + E("🌻", 340, 236, 26) + E("🚜", 400, 196, 40) + floor("#b59a6a", 262),
+      front: () => ""
+    },
+    montagne: {
+      outfit: null, noCounter: true,
+      back: () => `<rect width="640" height="300" fill="#d4ecfa"/>` + `<path d="M-20,220 L140,50 L260,180 L380,30 L560,200 L660,110 V300 H-20Z" fill="#7f97b0"/><path d="M110,82 L140,50 L172,86 L156,80 L140,92 L126,82Z M350,62 L380,30 L414,68 L396,62 L380,74 L364,64Z" fill="#fff"/>` +
+        `<path d="M0,230 q160,-30 320,-6 t320,-12 V300 H0Z" fill="#7fbf6a"/>` + [40, 100, 520, 590].map(x => E("🌲", x, 200, 40)).join("") + E("🐐", 250, 236, 30) + E("🏠", 470, 220, 34) + E("⛷️", 300, 160, 24) + floor("#9a8a6a", 268),
+      front: () => ""
+    },
+    jardin: {
+      outfit: "apron", oc: "#4f8a3f", noCounter: true,
+      back: () => `<rect width="640" height="300" fill="#d6eef9"/>` + E("☀️", 600, 34, 28) + `<rect x="0" y="70" width="640" height="90" fill="#cfb08a"/>` + [0, 1, 2, 3, 4, 5].map(i => win(20 + i * 104, 84, 56, 50)).join("") +
+        `<rect x="0" y="160" width="640" height="140" fill="#8a6a45"/>` + [0, 1, 2].map(r => `<rect x="${20 + r * 210}" y="178" width="180" height="60" rx="6" fill="#6b4e2e" stroke="#a0703c" stroke-width="5"/>` + [0, 1, 2, 3].map(i => E(["🥬", "🍅", "🥕", "🌷"][(i + r) % 4], 44 + r * 210 + i * 42, 212, 24)).join("")).join("") +
+        `<rect x="250" y="120" width="140" height="32" rx="4" fill="#4f8a3f"/><text x="320" y="142" font-size="15" font-weight="800" fill="#fff" text-anchor="middle">JARDIN PARTAGÉ</text>` + E("🪣", 600, 264, 24),
+      front: () => ""
+    },
+    kiosque: {
+      outfit: "vest", oc: "#2b5f8a",
+      back: () => `<rect width="640" height="300" fill="#cfe5f2"/>` + `<rect x="180" y="20" width="280" height="40" rx="4" fill="#2b5f8a"/><text x="320" y="47" font-size="20" font-weight="900" fill="#fff" text-anchor="middle" letter-spacing="2">KIOSQUE · PRESSE</text>` + floor("#b9b1a5") +
+        [0, 1, 2].map(r => `<rect x="380" y="${74 + r * 56}" width="240" height="6" fill="#5a4030"/>` + [0, 1, 2, 3, 4].map(i => `<rect x="${388 + i * 46}" y="${36 + r * 56 + 22}" width="38" height="16" fill="${["#e0474f", "#2f9c8a", "#f0c419", "#9b4fb0", "#2b5f8a"][(i + r) % 5]}" transform="skewX(-4)"/>`).join("")).join("") +
+        `<text x="500" y="250" font-size="11" fill="#333" text-anchor="middle">magazines · journaux · BD</text>`,
+      front: () => counter(40, 260, "#2b5f8a", ["📰", "🗞️", "🪙"], 22)
+    },
     // generic fall-backs
     rue: {
       outfit: null, noCounter: true,

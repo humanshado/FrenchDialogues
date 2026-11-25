@@ -43,7 +43,8 @@ if (fs.existsSync(tdir)) fs.readdirSync(tdir).filter(f => f.endsWith(".js")).for
   global.window = {}; eval(fs.readFileSync(path.join(tdir, f), "utf8")); const T = window.TEST;
   T.covers.forEach(c => { if (!files.includes(c + ".js")) bad(f, `covers missing chapter ${c}`); });
   T.sections.forEach(s => s.items.forEach((it, i) => {
-    if ((s.type === "choose" || s.type === "dialogue") && (it.a < 0 || it.a >= it.o.length)) bad(f, `${s.id} item ${i} answer out of range`);
+    if ((s.type === "choose" || s.type === "dialogue" || s.type === "listen") && (it.a < 0 || it.a >= it.o.length)) bad(f, `${s.id} item ${i} answer out of range`);
+    if (s.type === "listen" && (!it.say || !it.q)) bad(f, `${s.id} item ${i} listen needs say and q`);
     if (s.type === "type" && !it.a) bad(f, `${s.id} item ${i} no answer`);
     if (!it.lesson) bad(f, `${s.id} item ${i} no lesson tag`);
   }));

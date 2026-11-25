@@ -23,7 +23,7 @@ The book's themes, situations, grammar points and vocabulary are followed unit b
 
 The chips at the top of every page show or hide the English and the say-it hints, switch the gender colours on and off, and change the audio speed. Audio comes from the browser's French text-to-speech voice. Progress is saved in your browser's localStorage.
 
-Every two units, an **étape test** has a 📘 **Bilan** (fixed 40-point test with a DELF-style reading task and explanations), a 🎯 **Mastery test** (about 30 new randomised questions each time) and 📈 **Résultats** (history, best scores, units to revise).
+Every two units, an **étape test** has a 📘 **Bilan** (fixed 40-point test with DELF-style reading and listening tasks and explanations; options are shuffled on every attempt), a 🎯 **Mastery test** (about 30 new randomised questions each time) and 📈 **Résultats** (history, best scores, units to revise).
 
 ## Use it
 
@@ -34,11 +34,11 @@ Then open `https://humanshado.github.io/FrenchDialogues/`. You can also open `do
 
 ```
 src/engine.js          lesson engine (all tabs, quizzes, widgets, infographics, tests)
-src/art.js             SVG illustration library: characters (adults and children), 29 scene backdrops (doctor, pharmacy, lecture theatre, motorway…),
+src/art.js             SVG illustration library: characters (adults and children), 33 scene backdrops (doctor, pharmacy, lecture theatre, motorway, countryside, mountains, shared garden, newsstand…),
                        drawn flags, a tappable body diagram, street and campus plans with routes, transit diagrams, mini-diagrams, clock, money
 src/style.css          shared styles
 src/lessons/u00.js     unit content (one file per unit)
-src/tests/e1-test.js   étape tests (e1 = units 0–2, e2 = units 3–4…)
+src/tests/e1-test.js   étape tests (e1 = units 0–2, e2 = units 3–4…); f1-delf.js = DELF A1 mock exam
 tools/check.js         content checker (answer indexes, missing fields, map quiz targets, duplicates…)
 build.py               builds docs/ (site + course home) or dist/ (--standalone pages)
 docs/                  built site served by GitHub Pages
@@ -58,9 +58,12 @@ Scenes in `art.js`: appartement, aeroport, plage, fete, spectacle, classe, train
 - [x] Étape 3 · Le quotidien: Unité 5 *C'est quoi le programme ?*, Unité 6 *Félicitations !* (book pp. 75–102) + bilan
 - [x] Étape 4 · Chez soi, en voyage: Unité 7 *Chez moi*, Unité 8 *Bonnes vacances !* (book pp. 103–130) + bilan
 - [x] Étape 5 · Santé, études, travail: Unités 9–10 (Pas de chance !, Beau travail !) + bilan
-- [ ] Étape 6 · Nature et projets: Unités 11–12
+- [x] Étape 6 · Nature et projets: Unité 11 *Au grand air*, Unité 12 *C'était bien ?* (book pp. 159–186) + bilan
+- [x] DELF A1 · Épreuve blanche: a full mock exam in four parts (listening, reading, form-filling, speaking prep) + a mastery test drawn from all 13 units
 
-So far: 54 dialogues, 712 words, 391 activities, 5 étape tests.
+The whole book is covered.
+
+Totals: 65 dialogues, 826 words, 458 activities, 6 étape tests and a DELF A1 practice exam.
 
 ## Notes
 

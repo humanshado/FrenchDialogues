@@ -21,7 +21,7 @@
   const shuffle = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const BOOK = "Édito A1 · Méthode de français";
-  const RUB = { 1: "Premiers pas", 2: "Vivre en ville", 3: "Le quotidien", 4: "La famille et la maison", 5: "Voyages et santé", 6: "Études, travail, société" };
+  const RUB = { 1: "Premiers contacts", 2: "Consommer", 3: "Le quotidien", 4: "Chez soi, en voyage", 5: "Santé, études, travail", 6: "Nature et projets" };
   const UCOL = ["#c2508e", "#4f9d4f", "#9b4fb0", "#7d9a2e", "#e0474f", "#2f9c8a", "#e86a2e", "#4f9d4f", "#9b4fb0", "#7d9a2e", "#e0474f", "#2f9c8a", "#e86a2e"];
   const ucol = n => UCOL[n] || "#0f7b6c";
 
@@ -782,6 +782,7 @@
       if (it.type === "type") return typeQ(body, it, finish);
       let head = "", opts = it.options, answer = it.answer;
       if (it.type === "tf") { opts = ["Vrai", "Faux"]; answer = it.ok ? 0 : 1; head = `<div class="qtext">Vrai ou faux ? <span class="muted" style="font-weight:400">${esc(it.q || "")}</span></div><div class="qsentence">${fr(it.s)} ${playBtn(it.s)}</div>${it.en ? `<div class="en" style="text-align:center">${esc(it.en)}</div>` : ""}`; }
+      if (it.type !== "tf" && !it.keepOrder) { const idx = shuffle(opts.map((_, j) => j)); opts = idx.map(j => opts[j]); answer = idx.indexOf(answer); }
       if (it.type === "mcq") head = `${it.pic ? `<div class="qpic">${it.pic}</div>` : ""}<div class="qtext">${tz(esc(it.q).replace(/\[\[([^\]]+)\]\]/g, "[[$1]]"))}</div>`;
       if (it.type === "fill") { const [a, b = ""] = it.sentence.split("___"); head = `<div class="qtext">${esc(it.q || "Complétez · fill in the blank")}</div><div class="qsentence"><span class="fr">${esc(a)}<span class="blank">?</span>${esc(b)}</span></div>${it.en ? `<div class="en" style="text-align:center">${esc(it.en)}</div>` : ""}`; }
       if (it.type === "reply") head = `<div class="qtext">${esc(it.q || "Choose the best reply")}</div><div class="qsentence">${fr(it.prompt)} ${playBtn(it.prompt)}</div>${it.en ? `<div class="en" style="text-align:center">${esc(it.en)}</div>` : ""}`;
@@ -979,6 +980,7 @@
     };
     const markTiles = (el, i, a, p) => el.querySelectorAll(`[data-i="${i}"]`).forEach((x, j) => { if (j === a) x.classList.add("ok"); else if (j === p) x.classList.add("no"); });
 
+    const mixSec = (sec) => Object.assign({}, sec, { items: sec.items.map(it => { const idx = shuffle(it.o.map((_, j) => j)); return Object.assign({}, it, { o: idx.map(j => it.o[j]), a: idx.indexOf(it.a) }); }) });
     const W = {};
     W.match = (sec) => {
       const bs = shuffle(sec.items.map(x => x.b));
@@ -992,6 +994,7 @@
       } };
     };
     W.dialogue = (sec) => {
+      sec = mixSec(sec);
       const el = h(`<ol class="titems">${sec.items.map((it, i) => `<li><div class="mini">${it.lines.map(([who, txt]) => `<div><b>${esc(who)} :</b> ${txt === "___" ? `<span class="blank" data-b="${i}">……</span>` : fr(txt)}</div>`).join("")}</div><div class="opts" style="margin-top:6px">${it.o.map((o, j) => `<button class="tile opt-l" data-i="${i}" data-j="${j}">${"abc"[j]}. ${esc(o)}</button>`).join("")}</div><div class="fb"></div></li>`).join("")}</ol>`);
       const P = pickTiles(sec, el, (i, j) => { el.querySelector(`[data-b="${i}"]`).textContent = sec.items[i].o[j]; speak(sec.items[i].o[j]); });
       return { el, check() {
@@ -1024,6 +1027,7 @@
       } };
     };
     W.choose = (sec) => {
+      sec = mixSec(sec);
       const el = h(`<ol class="titems">${sec.items.map((it, i) => `<li><div class="row" style="justify-content:space-between"><span class="qsent"><b>${esc(it.s)}</b>${it.en ? ` <span class="muted">(${esc(it.en)})</span>` : ""}</span><span class="row">${it.o.map((o, j) => `<button class="tile" data-i="${i}" data-j="${j}">${"abcd"[j]}) ${esc(o)}</button>`).join("")}</span></div><div class="fb"></div></li>`).join("")}</ol>`);
       const P = pickTiles(sec, el, (i, j) => speak(sec.items[i].o[j]));
       return { el, check() {
@@ -1033,7 +1037,20 @@
         return { score: sc * sec.marks / sec.items.length, wrong };
       } };
     };
-    const SECNAME = { match: "Associez", dialogue: "Complétez le dialogue", type: "Écrivez", tf: "Vrai ou faux", choose: "Choisissez" };
+    W.listen = (sec) => {
+      sec = mixSec(sec);
+      const el = h(`<ol class="titems">${sec.items.map((it, i) => `<li><div class="row" style="gap:8px;align-items:center"><button class="btn small" data-play="${i}">▶ Écouter</button><b>${esc(it.q)}</b></div><div class="opts" style="margin-top:6px">${it.o.map((o, j) => `<button class="tile opt-l" data-i="${i}" data-j="${j}">${"abcd"[j]}. ${esc(o)}</button>`).join("")}</div><div class="fb"></div></li>`).join("")}</ol>`);
+      const heard = {};
+      el.addEventListener("click", e => { const b = e.target.closest("[data-play]"); if (!b) return; const i = +b.dataset.play; heard[i] = (heard[i] || 0) + 1; speak(sec.items[i].say); if (heard[i] >= 2) b.textContent = "▶ Écouter encore"; });
+      const P = pickTiles(sec, el);
+      return { el, check() {
+        P.lock(); let sc = 0; const wrong = [];
+        sec.items.forEach((it, i) => { const ok = P.pick[i] === it.a; if (ok) sc++; else wrong.push({ lesson: it.lesson, area: "dialogues" });
+          markTiles(el, i, it.a, P.pick[i]); el.querySelectorAll("li > .fb")[i].innerHTML = `${fbLine(ok, it.o[it.a], it.why)}<div class="muted" style="margin-top:4px">📝 ${fr(it.say)}</div>`; });
+        return { score: sc * sec.marks / sec.items.length, wrong };
+      } };
+    };
+    const SECNAME = { listen: "Écoutez", match: "Associez", dialogue: "Complétez le dialogue", type: "Écrivez", tf: "Vrai ou faux", choose: "Choisissez" };
 
     const views = {};
     views.book = (m) => {
