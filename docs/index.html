@@ -543,12 +543,35 @@ body:not(.no-gc) .ft-m .ftc{color:var(--m)} body:not(.no-gc) .ft-f .ftc{color:va
 .pc-stamp{align-self:flex-end;font-size:34px;border:3px dotted #c2508e;padding:4px 8px;border-radius:4px}
 .pc-to{border-top:1px solid #bbb;padding-top:6px;font-size:14px;line-height:1.9}.pc-to div{border-bottom:1px solid #ddd}
 @media (max-width:640px){.postcard{grid-template-columns:1fr}}
+
+/* ---------- Révisions page ---------- */
+.rv-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;position:sticky;top:0;z-index:5}
+.rv-bar input[type=search]{flex:1 1 260px;font-size:16px;padding:9px 12px;border:1px solid var(--line);border-radius:10px}
+.rv-bar select{font-size:15px;padding:8px;border:1px solid var(--line);border-radius:10px;max-width:280px}
+.rv-weak{font-size:14px;display:flex;gap:6px;align-items:center}
+.rv-sec h2{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.rv-sec h3{margin:14px 0 0;font-size:15px;color:var(--accent-2)}
+.rv-voc{table-layout:fixed}.rv-voc td{padding:6px 8px;vertical-align:top}.rv-voc td:nth-child(2){width:46%}.rv-voc tr{border-left:4px solid transparent}
+.rv-voc .rv-pic{width:34px;font-size:22px;text-align:center}.rv-voc .rv-box{width:70px;color:var(--accent);letter-spacing:1px;font-size:11px;white-space:nowrap}
+.rv-u{text-decoration:none}
+.rv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.rv-g h3{margin:6px 0;font-size:17px}.rv-g p{margin:6px 0;font-size:14px;line-height:1.5}
+.rv-ex{margin:6px 0 0;padding-left:18px}.rv-ex li{margin:4px 0}
+.rv-mis td{vertical-align:top}
+@media print{
+  .noprint,nav.tabs,footer,.rv-box{display:none!important}
+  header.top{position:static;box-shadow:none}
+  .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid-page}
+  .rv-sec{break-inside:auto}.rv-voc tr{break-inside:avoid}
+  b.say{text-decoration:none}
+}
 </style></head>
 <body><header class="top"><div class="top-inner"><div class="brand"><small>Interactive course · FrenchDialogues</small><b>Édito A1 · Méthode de français</b></div></div></header>
 <main>
 <div class="card home-hero"><div><h1>Édito A1</h1><p class="lead" style="margin-top:8px">An interactive course built on the 13 units of <i>Édito A1, méthode de français</i> (Didier). Each unit follows the book's themes, communication goals, grammar, vocabulary, pronunciation and civilisation pages, from <b>Bonjour !</b> to the DELF A1.</p>
 <p style="font-size:14px">Every unit has illustrated dialogues with audio, a shadow mode and a role mode, a picture dictionary and flashcards, grammar infographics and builders, the <i>Pour communiquer</i> boxes, pronunciation, listening and dictation, book-style activities, role-plays, ateliers with DELF practice, and the civilisation and cliché pages.</p>
 <p class="muted" style="font-size:13px">13 of 13 units ready · 65 dialogues · 826 words · 458 activities · progress is saved in this browser</p></div><div id="hero-scene"></div></div>
+<a class="card lesson-link" href="revision.html" style="border-left:6px solid #2f9c8a"><span class="n" style="background:#2f9c8a;color:#fff">📚</span><span style="flex:1"><span class="frt">Révisions</span><br><span style="font-size:14px">Search and revise the whole course: all the vocabulary, grammar points, <i>Pour communiquer</i> expressions and common mistakes in one page. Printable, with a vocabulary export (CSV for Anki or a spreadsheet).</span></span></a>
 <div class="card legend"><b>How each unit works</b><div class="lgrid">
 <span>💬 <b>Dialogues</b> play, shadow, take a role</span><span>🗂️ <b>Vocabulaire</b> picture dictionary + flashcards</span><span>🧩 <b>Grammaire</b> infographics + builders</span><span>🗨️ <b>Pour communiquer</b> the key phrases</span>
 <span>🗣️ <b>Prononciation</b> sounds + minimal pairs</span><span>🎧 <b>Écoute</b> listening + dictation</span><span>✍️ <b>Activités</b> book-style quiz</span><span>🛠️ <b>Ateliers & DELF</b> projects + exam practice</span></div></div>

@@ -23,7 +23,7 @@ The book's themes, situations, grammar points and vocabulary are followed unit b
 
 The chips at the top of every page show or hide the English and the say-it hints, switch the gender colours on and off, and change the audio speed. Audio comes from the browser's French text-to-speech voice. Progress is saved in your browser's localStorage.
 
-Every two units, an **étape test** has a 📘 **Bilan** (fixed 40-point test with DELF-style reading and listening tasks and explanations; options are shuffled on every attempt), a 🎯 **Mastery test** (about 30 new randomised questions each time) and 📈 **Résultats** (history, best scores, units to revise).
+Every two units, an **étape test** has a 📘 **Bilan** (fixed 40–45-point test with a DELF-style reading task, a listening section with transcripts, and explanations; options are shuffled on every attempt), a 🎯 **Mastery test** (about 30 new randomised questions each time) and 📈 **Résultats** (history, best scores, units to revise).
 
 ## Use it
 
@@ -37,6 +37,7 @@ src/engine.js          lesson engine (all tabs, quizzes, widgets, infographics, 
 src/art.js             SVG illustration library: characters (adults and children), 33 scene backdrops (doctor, pharmacy, lecture theatre, motorway, countryside, mountains, shared garden, newsstand…),
                        drawn flags, a tappable body diagram, street and campus plans with routes, transit diagrams, mini-diagrams, clock, money
 src/style.css          shared styles
+src/revision.js        the Révisions page (search, print, CSV export)
 src/lessons/u00.js     unit content (one file per unit)
 src/tests/e1-test.js   étape tests (e1 = units 0–2, e2 = units 3–4…); f1-delf.js = DELF A1 mock exam
 tools/check.js         content checker (answer indexes, missing fields, map quiz targets, duplicates…)
@@ -62,6 +63,8 @@ Scenes in `art.js`: appartement, aeroport, plage, fete, spectacle, classe, train
 - [x] DELF A1 · Épreuve blanche: a full mock exam in four parts (listening, reading, form-filling, speaking prep) + a mastery test drawn from all 13 units
 
 The whole book is covered.
+
+📚 **Révisions** (`revision.html`, linked from the course home): every unit's vocabulary, grammar points, *Pour communiquer* expressions and common mistakes in one searchable page (French or English, accents optional), filter by unit or by words still to review, tap to hear, print, or export the vocabulary as CSV for Anki or a spreadsheet.
 
 Totals: 65 dialogues, 826 words, 458 activities, 6 étape tests and a DELF A1 practice exam.
 

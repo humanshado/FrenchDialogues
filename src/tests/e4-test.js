@@ -95,6 +95,18 @@ window.TEST = {
         { s: "Il faisait chaud dehors.", ok: false, why: "Il faisait froid dehors.", lesson: "u08" },
         { s: "Tom rentre à Paris vendredi.", ok: true, lesson: "u08" }
       ]
+    },
+    {
+      id: "s7", type: "listen", marks: 5,
+      instr: "Écoutez et répondez.",
+      instrEn: "Listening: play each recording (twice if you like), then choose. The transcript appears after you check.",
+      items: [
+        { say: "L'appartement fait cinquante mètres carrés. Il y a deux chambres, une cuisine et une salle de bains. Le loyer est de six cents euros.", q: "Combien de chambres ?", o: ["deux", "trois", "une"], a: 0, lesson: "u07" },
+        { say: "L'appartement fait cinquante mètres carrés. Il y a deux chambres, une cuisine et une salle de bains. Le loyer est de six cents euros.", q: "Le loyer est de…", o: ["600 €", "500 €", "650 €"], a: 0, lesson: "u07" },
+        { say: "Allô, monsieur ? Il y a une fuite d'eau dans la cuisine ! Vous pouvez venir aujourd'hui ?", q: "Le problème est…", o: ["une fuite d'eau", "une panne d'électricité", "une porte cassée"], a: 0, lesson: "u07" },
+        { say: "Nous sommes partis en Bretagne pendant une semaine. Nous avons fait du vélo et nous sommes allés à la plage. C'était génial !", q: "Ils sont restés…", o: ["une semaine", "un mois", "un week-end"], a: 0, lesson: "u08" },
+        { say: "Bonjour, je voudrais réserver une chambre double pour deux nuits, du dix au douze août.", q: "La personne réserve…", o: ["une chambre double", "une chambre simple", "un appartement"], a: 0, lesson: "u08" }
+      ]
     }
   ],
   selfCheck: [

@@ -94,6 +94,18 @@ window.TEST = {
         { s: "Part 2. Your card says « santé ».", o: ["Vous faites du sport pour être en forme ?", "Santé !", "J'ai mal."], a: 0, lesson: "u09" },
         { s: "Part 3 (dialogue simulé). You're at the pharmacy with a sore throat.", o: ["Bonjour, j'ai mal à la gorge. Qu'est-ce que vous me conseillez ?", "Bonjour, je suis la gorge.", "Donnez-moi tout, merci."], a: 0, lesson: "u09" }
       ]
+    },
+    {
+      id: "s7", type: "listen", marks: 5,
+      instr: "Écoutez et répondez.",
+      instrEn: "Listening: play each recording (twice if you like), then choose. The transcript appears after you check.",
+      items: [
+        { say: "Ce matin, je me suis réveillée en retard, j'ai raté le bus et j'ai perdu mes clés. Quelle journée !", q: "La personne a…", o: ["une mauvaise journée", "une bonne journée", "des vacances"], a: 0, lesson: "u09" },
+        { say: "Vous avez de la fièvre. Il faut rester au lit et prendre ce médicament trois fois par jour.", q: "Le médecin conseille de…", o: ["rester au lit", "faire du sport", "aller au travail"], a: 0, lesson: "u09" },
+        { say: "J'ai mal au dos depuis trois jours. Qu'est-ce que vous me conseillez ?", q: "Depuis quand a-t-il mal ?", o: ["trois jours", "trois semaines", "trois heures"], a: 0, lesson: "u09" },
+        { say: "Je suis en master d'informatique. L'année dernière, j'ai fait un stage de six mois à Montréal.", q: "Le stage a duré…", o: ["six mois", "un an", "trois mois"], a: 0, lesson: "u10" },
+        { say: "Nous cherchons un assistant à temps partiel, vingt heures par semaine. Vous devez parler anglais.", q: "Le poste est…", o: ["à temps partiel", "à temps plein", "le week-end"], a: 0, lesson: "u10" }
+      ]
     }
   ],
   selfCheck: [

@@ -543,6 +543,28 @@ body:not(.no-gc) .ft-m .ftc{color:var(--m)} body:not(.no-gc) .ft-f .ftc{color:va
 .pc-stamp{align-self:flex-end;font-size:34px;border:3px dotted #c2508e;padding:4px 8px;border-radius:4px}
 .pc-to{border-top:1px solid #bbb;padding-top:6px;font-size:14px;line-height:1.9}.pc-to div{border-bottom:1px solid #ddd}
 @media (max-width:640px){.postcard{grid-template-columns:1fr}}
+
+/* ---------- Révisions page ---------- */
+.rv-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;position:sticky;top:0;z-index:5}
+.rv-bar input[type=search]{flex:1 1 260px;font-size:16px;padding:9px 12px;border:1px solid var(--line);border-radius:10px}
+.rv-bar select{font-size:15px;padding:8px;border:1px solid var(--line);border-radius:10px;max-width:280px}
+.rv-weak{font-size:14px;display:flex;gap:6px;align-items:center}
+.rv-sec h2{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.rv-sec h3{margin:14px 0 0;font-size:15px;color:var(--accent-2)}
+.rv-voc{table-layout:fixed}.rv-voc td{padding:6px 8px;vertical-align:top}.rv-voc td:nth-child(2){width:46%}.rv-voc tr{border-left:4px solid transparent}
+.rv-voc .rv-pic{width:34px;font-size:22px;text-align:center}.rv-voc .rv-box{width:70px;color:var(--accent);letter-spacing:1px;font-size:11px;white-space:nowrap}
+.rv-u{text-decoration:none}
+.rv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.rv-g h3{margin:6px 0;font-size:17px}.rv-g p{margin:6px 0;font-size:14px;line-height:1.5}
+.rv-ex{margin:6px 0 0;padding-left:18px}.rv-ex li{margin:4px 0}
+.rv-mis td{vertical-align:top}
+@media print{
+  .noprint,nav.tabs,footer,.rv-box{display:none!important}
+  header.top{position:static;box-shadow:none}
+  .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid-page}
+  .rv-sec{break-inside:auto}.rv-voc tr{break-inside:avoid}
+  b.say{text-decoration:none}
+}
 </style></head>
 <body><script>window.LESSONS=[];window.COURSE_HOME="index.html";</script><script>// Unité 0 · Bienvenue ! (book pp. 12–18)
 // Sections: C'est en français ! · Salut, ça va ? · L'alphabet · Je m'appelle… · Un, deux, trois… partez ! · Aujourd'hui, c'est le… · Dans la classe
@@ -2232,6 +2254,18 @@ window.TEST = {
         { s: "Elle descend à l'arrêt Université.", ok: false, why: "direction Université, but she gets off at Opéra", lesson: "u02" },
         { s: "La rue Voltaire est la deuxième rue à gauche.", ok: true, lesson: "u02" },
         { s: "Inès apporte un maillot de bain.", ok: true, lesson: "u02" }
+      ]
+    },
+    {
+      id: "s7", type: "listen", marks: 5,
+      instr: "Écoutez et répondez.",
+      instrEn: "Listening: play each recording (twice if you like), then choose. The transcript appears after you check.",
+      items: [
+        { say: "Bonjour ! Je m'appelle Lucie Martin. J'ai vingt-trois ans et j'habite à Lyon.", q: "Quel âge a Lucie ?", o: ["23 ans", "33 ans", "13 ans"], a: 0, lesson: "u01" },
+        { say: "Bonjour ! Je m'appelle Lucie Martin. J'ai vingt-trois ans et j'habite à Lyon.", q: "Elle habite…", o: ["à Lyon", "à Paris", "à Lille"], a: 0, lesson: "u01" },
+        { say: "Mon numéro de téléphone, c'est le zéro six, quarante-cinq, douze, quatre-vingts, dix-sept.", q: "Le numéro est…", o: ["06 45 12 80 17", "06 54 12 80 17", "06 45 02 90 17"], a: 0, lesson: "u00" },
+        { say: "Pardon, madame, le musée, s'il vous plaît ? — Allez tout droit, puis tournez à gauche. C'est en face de la poste.", q: "Le musée est…", o: ["en face de la poste", "à côté de la gare", "derrière la poste"], a: 0, lesson: "u02" },
+        { say: "Pour aller à la gare, prenez la ligne quatre et descendez à Montparnasse.", q: "On prend…", o: ["la ligne 4", "la ligne 14", "le bus 4"], a: 0, lesson: "u02" }
       ]
     }
   ],

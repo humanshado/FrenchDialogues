@@ -89,6 +89,18 @@ window.TEST = {
         { s: "La rue Voltaire est la deuxième rue à gauche.", ok: true, lesson: "u02" },
         { s: "Inès apporte un maillot de bain.", ok: true, lesson: "u02" }
       ]
+    },
+    {
+      id: "s7", type: "listen", marks: 5,
+      instr: "Écoutez et répondez.",
+      instrEn: "Listening: play each recording (twice if you like), then choose. The transcript appears after you check.",
+      items: [
+        { say: "Bonjour ! Je m'appelle Lucie Martin. J'ai vingt-trois ans et j'habite à Lyon.", q: "Quel âge a Lucie ?", o: ["23 ans", "33 ans", "13 ans"], a: 0, lesson: "u01" },
+        { say: "Bonjour ! Je m'appelle Lucie Martin. J'ai vingt-trois ans et j'habite à Lyon.", q: "Elle habite…", o: ["à Lyon", "à Paris", "à Lille"], a: 0, lesson: "u01" },
+        { say: "Mon numéro de téléphone, c'est le zéro six, quarante-cinq, douze, quatre-vingts, dix-sept.", q: "Le numéro est…", o: ["06 45 12 80 17", "06 54 12 80 17", "06 45 02 90 17"], a: 0, lesson: "u00" },
+        { say: "Pardon, madame, le musée, s'il vous plaît ? — Allez tout droit, puis tournez à gauche. C'est en face de la poste.", q: "Le musée est…", o: ["en face de la poste", "à côté de la gare", "derrière la poste"], a: 0, lesson: "u02" },
+        { say: "Pour aller à la gare, prenez la ligne quatre et descendez à Montparnasse.", q: "On prend…", o: ["la ligne 4", "la ligne 14", "le bus 4"], a: 0, lesson: "u02" }
+      ]
     }
   ],
   selfCheck: [

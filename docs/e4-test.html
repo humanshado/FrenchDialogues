@@ -543,6 +543,28 @@ body:not(.no-gc) .ft-m .ftc{color:var(--m)} body:not(.no-gc) .ft-f .ftc{color:va
 .pc-stamp{align-self:flex-end;font-size:34px;border:3px dotted #c2508e;padding:4px 8px;border-radius:4px}
 .pc-to{border-top:1px solid #bbb;padding-top:6px;font-size:14px;line-height:1.9}.pc-to div{border-bottom:1px solid #ddd}
 @media (max-width:640px){.postcard{grid-template-columns:1fr}}
+
+/* ---------- Révisions page ---------- */
+.rv-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;position:sticky;top:0;z-index:5}
+.rv-bar input[type=search]{flex:1 1 260px;font-size:16px;padding:9px 12px;border:1px solid var(--line);border-radius:10px}
+.rv-bar select{font-size:15px;padding:8px;border:1px solid var(--line);border-radius:10px;max-width:280px}
+.rv-weak{font-size:14px;display:flex;gap:6px;align-items:center}
+.rv-sec h2{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.rv-sec h3{margin:14px 0 0;font-size:15px;color:var(--accent-2)}
+.rv-voc{table-layout:fixed}.rv-voc td{padding:6px 8px;vertical-align:top}.rv-voc td:nth-child(2){width:46%}.rv-voc tr{border-left:4px solid transparent}
+.rv-voc .rv-pic{width:34px;font-size:22px;text-align:center}.rv-voc .rv-box{width:70px;color:var(--accent);letter-spacing:1px;font-size:11px;white-space:nowrap}
+.rv-u{text-decoration:none}
+.rv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.rv-g h3{margin:6px 0;font-size:17px}.rv-g p{margin:6px 0;font-size:14px;line-height:1.5}
+.rv-ex{margin:6px 0 0;padding-left:18px}.rv-ex li{margin:4px 0}
+.rv-mis td{vertical-align:top}
+@media print{
+  .noprint,nav.tabs,footer,.rv-box{display:none!important}
+  header.top{position:static;box-shadow:none}
+  .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid-page}
+  .rv-sec{break-inside:auto}.rv-voc tr{break-inside:avoid}
+  b.say{text-decoration:none}
+}
 </style></head>
 <body><script>window.LESSONS=[];window.COURSE_HOME="index.html";</script><script>// Unité 7 · Chez moi (book pp. 103–116)
 // Situations: emménager (état des lieux, équipement) · s'informer sur un logement · décrire un salon · le règlement de l'immeuble · un problème domestique
@@ -1654,6 +1676,18 @@ window.TEST = {
         { s: "Hier, Tom est allé aux bains.", ok: true, lesson: "u08" },
         { s: "Il faisait chaud dehors.", ok: false, why: "Il faisait froid dehors.", lesson: "u08" },
         { s: "Tom rentre à Paris vendredi.", ok: true, lesson: "u08" }
+      ]
+    },
+    {
+      id: "s7", type: "listen", marks: 5,
+      instr: "Écoutez et répondez.",
+      instrEn: "Listening: play each recording (twice if you like), then choose. The transcript appears after you check.",
+      items: [
+        { say: "L'appartement fait cinquante mètres carrés. Il y a deux chambres, une cuisine et une salle de bains. Le loyer est de six cents euros.", q: "Combien de chambres ?", o: ["deux", "trois", "une"], a: 0, lesson: "u07" },
+        { say: "L'appartement fait cinquante mètres carrés. Il y a deux chambres, une cuisine et une salle de bains. Le loyer est de six cents euros.", q: "Le loyer est de…", o: ["600 €", "500 €", "650 €"], a: 0, lesson: "u07" },
+        { say: "Allô, monsieur ? Il y a une fuite d'eau dans la cuisine ! Vous pouvez venir aujourd'hui ?", q: "Le problème est…", o: ["une fuite d'eau", "une panne d'électricité", "une porte cassée"], a: 0, lesson: "u07" },
+        { say: "Nous sommes partis en Bretagne pendant une semaine. Nous avons fait du vélo et nous sommes allés à la plage. C'était génial !", q: "Ils sont restés…", o: ["une semaine", "un mois", "un week-end"], a: 0, lesson: "u08" },
+        { say: "Bonjour, je voudrais réserver une chambre double pour deux nuits, du dix au douze août.", q: "La personne réserve…", o: ["une chambre double", "une chambre simple", "un appartement"], a: 0, lesson: "u08" }
       ]
     }
   ],

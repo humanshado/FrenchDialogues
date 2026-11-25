@@ -94,6 +94,18 @@ window.TEST = {
         { s: "4. Ask a question", o: ["Qu'est-ce que je peux apporter ?", "Tu as quel âge ?", "Il est quelle heure ?"], a: 0, lesson: "u05" },
         { s: "5. End your message", o: ["Je t'embrasse, Inès", "Salutations distinguées.", "Bonjour, Inès"], a: 0, lesson: "u06" }
       ]
+    },
+    {
+      id: "s7", type: "listen", marks: 5,
+      instr: "Écoutez et répondez.",
+      instrEn: "Listening: play each recording (twice if you like), then choose. The transcript appears after you check.",
+      items: [
+        { say: "Le matin, je me lève à sept heures, je prends une douche et je pars au travail à huit heures moins le quart.", q: "À quelle heure part-il au travail ?", o: ["7 h 45", "8 h 15", "7 h"], a: 0, lesson: "u05" },
+        { say: "Salut ! On va au cinéma samedi soir ? Le film commence à vingt heures trente.", q: "Le film commence à…", o: ["20 h 30", "21 h 30", "20 h"], a: 0, lesson: "u05" },
+        { say: "Désolée, samedi, je ne peux pas : je travaille. Dimanche, ça te va ?", q: "La personne…", o: ["refuse et propose dimanche", "accepte samedi", "ne répond pas"], a: 0, lesson: "u05" },
+        { say: "Je vous présente ma sœur Julie. Elle est mariée et elle a deux enfants : un garçon et une fille.", q: "Julie a…", o: ["deux enfants", "trois enfants", "un enfant"], a: 0, lesson: "u06" },
+        { say: "Félicitations pour votre mariage ! Tous nos vœux de bonheur !", q: "C'est pour…", o: ["un mariage", "un anniversaire", "une naissance"], a: 0, lesson: "u06" }
+      ]
     }
   ],
   selfCheck: [

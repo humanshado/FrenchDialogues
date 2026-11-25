@@ -88,6 +88,18 @@ window.TEST = {
         { s: "On trouve les liseuses au 3e étage.", ok: false, why: "multimédia = 2e étage; the restaurant is on the 3rd", lesson: "u04" },
         { s: "Au restaurant, une formule plat + dessert coûte 12 euros.", ok: true, lesson: "u03" }
       ]
+    },
+    {
+      id: "s7", type: "listen", marks: 5,
+      instr: "Écoutez et répondez.",
+      instrEn: "Listening: play each recording (twice if you like), then choose. The transcript appears after you check.",
+      items: [
+        { say: "Bonjour, je voudrais un kilo de pommes et deux cents grammes de fromage, s'il vous plaît.", q: "La cliente achète…", o: ["des pommes et du fromage", "des poires et du jambon", "du pain et du fromage"], a: 0, lesson: "u03" },
+        { say: "Alors, ça fait huit euros cinquante, s'il vous plaît.", q: "Combien ça coûte ?", o: ["8,50 €", "18,50 €", "8,15 €"], a: 0, lesson: "u03" },
+        { say: "Pour moi, une salade niçoise et une eau gazeuse, s'il vous plaît.", q: "Où est cette personne ?", o: ["au restaurant", "à la boulangerie", "au marché"], a: 0, lesson: "u03" },
+        { say: "Demain, il va faire froid et il va pleuvoir dans le nord. Dans le sud, soleil et vingt degrés.", q: "Demain, dans le sud, il fait…", o: ["beau", "froid", "mauvais"], a: 0, lesson: "u04" },
+        { say: "Bonjour, j'ai perdu mon sac hier dans le métro. C'est un sac noir, en cuir, avec mes clés.", q: "Le sac est…", o: ["noir, en cuir", "rouge, en tissu", "noir, en plastique"], a: 0, lesson: "u04" }
+      ]
     }
   ],
   selfCheck: [

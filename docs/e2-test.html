@@ -543,6 +543,28 @@ body:not(.no-gc) .ft-m .ftc{color:var(--m)} body:not(.no-gc) .ft-f .ftc{color:va
 .pc-stamp{align-self:flex-end;font-size:34px;border:3px dotted #c2508e;padding:4px 8px;border-radius:4px}
 .pc-to{border-top:1px solid #bbb;padding-top:6px;font-size:14px;line-height:1.9}.pc-to div{border-bottom:1px solid #ddd}
 @media (max-width:640px){.postcard{grid-template-columns:1fr}}
+
+/* ---------- Révisions page ---------- */
+.rv-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;position:sticky;top:0;z-index:5}
+.rv-bar input[type=search]{flex:1 1 260px;font-size:16px;padding:9px 12px;border:1px solid var(--line);border-radius:10px}
+.rv-bar select{font-size:15px;padding:8px;border:1px solid var(--line);border-radius:10px;max-width:280px}
+.rv-weak{font-size:14px;display:flex;gap:6px;align-items:center}
+.rv-sec h2{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.rv-sec h3{margin:14px 0 0;font-size:15px;color:var(--accent-2)}
+.rv-voc{table-layout:fixed}.rv-voc td{padding:6px 8px;vertical-align:top}.rv-voc td:nth-child(2){width:46%}.rv-voc tr{border-left:4px solid transparent}
+.rv-voc .rv-pic{width:34px;font-size:22px;text-align:center}.rv-voc .rv-box{width:70px;color:var(--accent);letter-spacing:1px;font-size:11px;white-space:nowrap}
+.rv-u{text-decoration:none}
+.rv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.rv-g h3{margin:6px 0;font-size:17px}.rv-g p{margin:6px 0;font-size:14px;line-height:1.5}
+.rv-ex{margin:6px 0 0;padding-left:18px}.rv-ex li{margin:4px 0}
+.rv-mis td{vertical-align:top}
+@media print{
+  .noprint,nav.tabs,footer,.rv-box{display:none!important}
+  header.top{position:static;box-shadow:none}
+  .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid-page}
+  .rv-sec{break-inside:auto}.rv-voc tr{break-inside:avoid}
+  b.say{text-decoration:none}
+}
 </style></head>
 <body><script>window.LESSONS=[];window.COURSE_HOME="index.html";</script><script>// Unité 3 · Qu'est-ce qu'on mange ? (book pp. 47–60)
 // Situations: faire des courses au marché, au supermarché · commander au restaurant, au café · exprimer ses goûts
@@ -1761,6 +1783,18 @@ window.TEST = {
         { s: "Le dimanche, le magasin ouvre à 10 heures.", ok: true, lesson: "u03" },
         { s: "On trouve les liseuses au 3e étage.", ok: false, why: "multimédia = 2e étage; the restaurant is on the 3rd", lesson: "u04" },
         { s: "Au restaurant, une formule plat + dessert coûte 12 euros.", ok: true, lesson: "u03" }
+      ]
+    },
+    {
+      id: "s7", type: "listen", marks: 5,
+      instr: "Écoutez et répondez.",
+      instrEn: "Listening: play each recording (twice if you like), then choose. The transcript appears after you check.",
+      items: [
+        { say: "Bonjour, je voudrais un kilo de pommes et deux cents grammes de fromage, s'il vous plaît.", q: "La cliente achète…", o: ["des pommes et du fromage", "des poires et du jambon", "du pain et du fromage"], a: 0, lesson: "u03" },
+        { say: "Alors, ça fait huit euros cinquante, s'il vous plaît.", q: "Combien ça coûte ?", o: ["8,50 €", "18,50 €", "8,15 €"], a: 0, lesson: "u03" },
+        { say: "Pour moi, une salade niçoise et une eau gazeuse, s'il vous plaît.", q: "Où est cette personne ?", o: ["au restaurant", "à la boulangerie", "au marché"], a: 0, lesson: "u03" },
+        { say: "Demain, il va faire froid et il va pleuvoir dans le nord. Dans le sud, soleil et vingt degrés.", q: "Demain, dans le sud, il fait…", o: ["beau", "froid", "mauvais"], a: 0, lesson: "u04" },
+        { say: "Bonjour, j'ai perdu mon sac hier dans le métro. C'est un sac noir, en cuir, avec mes clés.", q: "Le sac est…", o: ["noir, en cuir", "rouge, en tissu", "noir, en plastique"], a: 0, lesson: "u04" }
       ]
     }
   ],

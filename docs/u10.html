@@ -543,6 +543,28 @@ body:not(.no-gc) .ft-m .ftc{color:var(--m)} body:not(.no-gc) .ft-f .ftc{color:va
 .pc-stamp{align-self:flex-end;font-size:34px;border:3px dotted #c2508e;padding:4px 8px;border-radius:4px}
 .pc-to{border-top:1px solid #bbb;padding-top:6px;font-size:14px;line-height:1.9}.pc-to div{border-bottom:1px solid #ddd}
 @media (max-width:640px){.postcard{grid-template-columns:1fr}}
+
+/* ---------- Révisions page ---------- */
+.rv-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;position:sticky;top:0;z-index:5}
+.rv-bar input[type=search]{flex:1 1 260px;font-size:16px;padding:9px 12px;border:1px solid var(--line);border-radius:10px}
+.rv-bar select{font-size:15px;padding:8px;border:1px solid var(--line);border-radius:10px;max-width:280px}
+.rv-weak{font-size:14px;display:flex;gap:6px;align-items:center}
+.rv-sec h2{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.rv-sec h3{margin:14px 0 0;font-size:15px;color:var(--accent-2)}
+.rv-voc{table-layout:fixed}.rv-voc td{padding:6px 8px;vertical-align:top}.rv-voc td:nth-child(2){width:46%}.rv-voc tr{border-left:4px solid transparent}
+.rv-voc .rv-pic{width:34px;font-size:22px;text-align:center}.rv-voc .rv-box{width:70px;color:var(--accent);letter-spacing:1px;font-size:11px;white-space:nowrap}
+.rv-u{text-decoration:none}
+.rv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.rv-g h3{margin:6px 0;font-size:17px}.rv-g p{margin:6px 0;font-size:14px;line-height:1.5}
+.rv-ex{margin:6px 0 0;padding-left:18px}.rv-ex li{margin:4px 0}
+.rv-mis td{vertical-align:top}
+@media print{
+  .noprint,nav.tabs,footer,.rv-box{display:none!important}
+  header.top{position:static;box-shadow:none}
+  .card{box-shadow:none;border:1px solid #ccc;break-inside:avoid-page}
+  .rv-sec{break-inside:auto}.rv-voc tr{break-inside:avoid}
+  b.say{text-decoration:none}
+}
 </style></head>
 <body><script>window.LESSONS=[];window.COURSE_HOME="index.html";</script><script>// Unité 10 · Beau travail ! (book pp. 145–158)
 // Situations: partir étudier à l'étranger (Erasmus+) · parler de ses études · le campus et le FacLab · les projets professionnels · l'entretien d'embauche

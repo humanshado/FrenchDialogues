@@ -74,6 +74,13 @@ for f in sorted(lesson_files.values()):
     (OUT / f"{m['id']}.html").write_text(page(f"Unité {m['num']} · {m['titleFr']} · Édito A1", scripts), encoding="utf-8")
     print("built", OUT / f"{m['id']}.html")
 
+# Révisions page: every unit's vocabulary, grammar, expressions and common mistakes, searchable and printable
+if not standalone:
+    allu = "".join(f"<script>{f.read_text(encoding='utf-8')}</script>" for f in sorted(lesson_files.values()))
+    rev = (SRC / "revision.js").read_text(encoding="utf-8")
+    (OUT / "revision.html").write_text(page("Révisions · Édito A1", f"<script>window.LESSONS=[];{home}window.UCOL={json.dumps(UCOL)};</script>{allu}<script>{rev}</script>"), encoding="utf-8")
+    print("built", OUT / "revision.html")
+
 tests = []
 for f in sorted((SRC / "tests").glob("*.js")) if (SRC / "tests").exists() else []:
     t = test_meta(f); tests.append(t)
@@ -110,6 +117,7 @@ if not standalone:
 <div class="card home-hero"><div><h1>Édito A1</h1><p class="lead" style="margin-top:8px">An interactive course built on the 13 units of <i>Édito A1, méthode de français</i> (Didier). Each unit follows the book's themes, communication goals, grammar, vocabulary, pronunciation and civilisation pages, from <b>Bonjour !</b> to the DELF A1.</p>
 <p style="font-size:14px">Every unit has illustrated dialogues with audio, a shadow mode and a role mode, a picture dictionary and flashcards, grammar infographics and builders, the <i>Pour communiquer</i> boxes, pronunciation, listening and dictation, book-style activities, role-plays, ateliers with DELF practice, and the civilisation and cliché pages.</p>
 <p class="muted" style="font-size:13px">{built} of 13 units ready · {nd} dialogues · {nv} words · {nq} activities · progress is saved in this browser</p></div><div id="hero-scene"></div></div>
+<a class="card lesson-link" href="revision.html" style="border-left:6px solid #2f9c8a"><span class="n" style="background:#2f9c8a;color:#fff">📚</span><span style="flex:1"><span class="frt">Révisions</span><br><span style="font-size:14px">Search and revise the whole course: all the vocabulary, grammar points, <i>Pour communiquer</i> expressions and common mistakes in one page. Printable, with a vocabulary export (CSV for Anki or a spreadsheet).</span></span></a>
 <div class="card legend"><b>How each unit works</b><div class="lgrid">
 <span>💬 <b>Dialogues</b> play, shadow, take a role</span><span>🗂️ <b>Vocabulaire</b> picture dictionary + flashcards</span><span>🧩 <b>Grammaire</b> infographics + builders</span><span>🗨️ <b>Pour communiquer</b> the key phrases</span>
 <span>🗣️ <b>Prononciation</b> sounds + minimal pairs</span><span>🎧 <b>Écoute</b> listening + dictation</span><span>✍️ <b>Activités</b> book-style quiz</span><span>🛠️ <b>Ateliers & DELF</b> projects + exam practice</span></div></div>
