@@ -49,18 +49,18 @@ docs/                  built site served by GitHub Pages
 1. Copy `src/lessons/u04.js` to `src/lessons/u05.js` and replace the content: `dialogues` (each with a `scene` from `art.js`, `people` and an optional `staff`), `vocab` (with `g: "m" | "f" | "pl"` for nouns), `grammar` (`body`, `info` infographics, `widget` builders), `expressions`, `flow`, `sounds`, `classify`, `practice`, `roleplays`, `ateliers`, `delf`, `detente`, `culture`, `cultureInfo`, `tips`, `mistakes`.
 2. Run `node tools/check.js`, then `python3 build.py`. The unit replaces its "coming soon" card on the course home.
 
-Scenes in `art.js`: fete, spectacle, classe, train, ville, rue, metro, arret, montreal, marche, supermarche, restaurant, cafe, boulangerie, epicerie, poissonnerie, fleuriste, grandmagasin, vetements, chaussures, objets, poste, gare, hotel, maison, bureau, papeterie. Infographic types: `gender`, `merge`, `conj`, `pics`, `compare`, `card`, `minis`, `pattern`, `scale`, `ladder`, `flow`, `map`, `metro`, `bars`, `numbers`, `alphabet`, `calendar`, `timeline`, `flags`, `sms`, `form`, `tree` (family tree), `agenda` (day planner with clocks). Widgets: `sort`, `combo`, `agree`, `contract`, `numbers`, `prices`, `clock`, `date`, `spell`, `clock12` (everyday time: *moins le quart*).
+Scenes in `art.js`: appartement, aeroport, plage, fete, spectacle, classe, train, ville, rue, metro, arret, montreal, marche, supermarche, restaurant, cafe, boulangerie, epicerie, poissonnerie, fleuriste, grandmagasin, vetements, chaussures, objets, poste, gare, hotel, maison, bureau, papeterie. Infographic types: `gender`, `merge`, `conj`, `pics`, `compare`, `card`, `minis`, `pattern`, `scale`, `ladder`, `flow`, `map`, `metro`, `bars`, `numbers`, `alphabet`, `calendar`, `timeline`, `flags`, `sms`, `form`, `tree` (family tree), `agenda` (day planner with clocks), `floorplan` (flat plan with a find-the-object game), `signs` (rule pictograms), `postcard`, `etrehouse` (la maison d'être). Widgets: `sort`, `combo`, `agree`, `contract`, `numbers`, `prices`, `clock`, `date`, `spell`, `clock12` (everyday time: *moins le quart*).
 
 ## Progress
 
 - [x] Étape 1 · Premiers contacts: Unité 0 *Bienvenue !*, Unité 1 *Et vous ?*, Unité 2 *On va où ?* (book pp. 12–46) + bilan
 - [x] Étape 2 · Consommer: Unité 3 *Qu'est-ce qu'on mange ?*, Unité 4 *Les soldes, c'est parti !* (book pp. 47–74) + bilan
 - [x] Étape 3 · Le quotidien: Unité 5 *C'est quoi le programme ?*, Unité 6 *Félicitations !* (book pp. 75–102) + bilan
-- [ ] Étape 4 · Chez soi, en voyage: Unités 7–8
+- [x] Étape 4 · Chez soi, en voyage: Unité 7 *Chez moi*, Unité 8 *Bonnes vacances !* (book pp. 103–130) + bilan
 - [ ] Étape 5 · Santé, études, travail: Unités 9–10
 - [ ] Étape 6 · Nature et projets: Unités 11–12
 
-So far: 34 dialogues, 494 words, 256 activities, 3 étape tests.
+So far: 44 dialogues, 597 words, 323 activities, 4 étape tests.
 
 ## Notes
 

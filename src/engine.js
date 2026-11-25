@@ -410,6 +410,34 @@
     // a day planner: times with clock faces
     agenda: (s) => ig(s.title, `<div class="agenda">${s.items.map(x => `<div class="ag-row" data-say="${esc(x.say || x.fr)}"><div class="ag-clock">${A.clock(x.h, x.m, 54)}<b>${esc(x.t || timeStr(x.h, x.m))}</b></div><div class="ag-pic">${x.pic || ""}</div><div>${fr(x.fr)}<div class="en">${esc(x.en)}</div></div></div>`).join("")}</div>${s.note ? `<div class="gnote">${tz(s.note)}</div>` : ""}`)
   });
+  Object.assign(INFO, {
+    // apartment floor plan: rooms + furniture; quiz = spoken description → tap the object
+    floorplan: (s) => {
+      const P = s.plan, svg = `<svg class="map-svg" viewBox="0 0 400 260" role="img" aria-label="plan"><rect width="400" height="260" fill="#f6f1e7"/>${P.rooms.map(r => `<rect x="${r.x}" y="${r.y}" width="${r.w}" height="${r.h}" fill="${r.c || "#fff"}" stroke="#5a4a3a" stroke-width="4"/><text x="${r.x + 8}" y="${r.y + 16}" font-size="11" font-weight="800" fill="#5a4a3a">${r.name}</text>${r.m2 ? `<text x="${r.x + r.w - 8}" y="${r.y + 16}" font-size="9" text-anchor="end" fill="#8a7a6a">${r.m2} m²</text>` : ""}`).join("")}${(P.doors || []).map(d => `<rect x="${d[0]}" y="${d[1]}" width="${d[2]}" height="${d[3]}" fill="#f6f1e7"/>`).join("")}${(P.windows || []).map(d => `<rect x="${d[0]}" y="${d[1]}" width="${d[2]}" height="${d[3]}" fill="#8ec5e6"/>`).join("")}${P.items.map(it => `<g class="mplace" data-place="${it.id}" data-say="${esc(it.say || it.name)}" transform="translate(${it.x},${it.y})"><circle r="13" fill="#fff" stroke="#c2508e" stroke-width="2"/><text font-size="15" text-anchor="middle" dominant-baseline="central">${it.pic}</text><text y="${it.y > 225 ? -18 : 23}" font-size="8.5" font-weight="700" text-anchor="middle" fill="#2b2118" paint-order="stroke" stroke="#fff" stroke-width="3">${it.name}</text></g>`).join("")}</svg>`;
+      const el = ig(s.title, `<div class="mapwrap">${svg}</div>${s.quiz ? `<div class="row mquiz"><button class="btn small primary">🎧 Qu'est-ce que c'est ? · find the object</button><span class="mq-fb muted"></span></div>` : ""}${s.note ? `<div class="gnote">${tz(s.note)}</div>` : ""}`, "map-fig");
+      if (s.quiz) {
+        let cur = null; const fb = $(".mq-fb", el);
+        $(".mquiz button", el).onclick = () => { cur = s.quiz[Math.floor(Math.random() * s.quiz.length)]; fb.innerHTML = `🔊 Listen, then tap the object. <button class="btn small" data-again>▶ again</button>`; speak(cur.say); };
+        el.addEventListener("click", e => {
+          if (e.target.closest("[data-again]") && cur) { speak(cur.say); return; }
+          const pl = e.target.closest(".mplace"); if (!pl || !cur) return; e.stopPropagation();
+          const ok = pl.dataset.place === cur.answer, right = P.items.find(x => x.id === cur.answer);
+          fb.innerHTML = `${ok ? `<span style="color:var(--good)">✓ Oui ! C'est ${esc(right.say || right.name)}.</span>` : `<span style="color:var(--bad)">✗ Non : c'est ${esc(right.say || right.name)}.</span>`} <span class="fr" lang="fr">${esc(cur.say)}</span>${cur.en ? ` <span class="en">· ${esc(cur.en)}</span>` : ""}`; cur = null;
+        }, true);
+      }
+      return el;
+    },
+    // pictogram signs: interdiction (red) / obligation (blue)
+    signs: (s) => ig(s.title, `<div class="signs">${s.items.map(x => `<button class="sign sign-${x.type || "no"}" data-say="${esc(x.fr)}"><span class="sg-ic"><span class="sg-pic">${x.pic}</span>${(x.type || "no") === "no" ? `<span class="sg-bar"></span>` : ""}</span>${fr(x.fr)}<span class="en">${esc(x.en)}</span></button>`).join("")}</div>${s.note ? `<div class="gnote">${tz(s.note)}</div>` : ""}`),
+    // a postcard
+    postcard: (s) => ig(s.caption || "", `<div class="postcard"><div class="pc-left"><div class="pc-photo">${s.pic || "🏖️"}<span>${esc(s.place || "")}</span></div><div class="pc-text">${s.lines.map(l => `<p data-say="${esc(l[0])}"><span class="fr" lang="fr">${esc(l[0])}</span>${l[1] ? `<span class="en">${esc(l[1])}</span>` : ""}</p>`).join("")}</div></div><div class="pc-right"><div class="pc-stamp">${s.stamp || "🇫🇷"}</div><div class="pc-to">${(s.to || []).map(t => `<div>${esc(t)}</div>`).join("")}</div></div></div>${s.note ? `<div class="gnote">${tz(s.note)}</div>` : ""}`, "doc-fig"),
+    // la maison d'être: the verbs conjugated with être in the passé composé
+    etrehouse: (s) => {
+      const V = [["naître", "né(e)", "👶", 40, 222], ["mourir", "mort(e)", "🕯️", 360, 222], ["arriver", "arrivé(e)", "🧳", 40, 150], ["partir", "parti(e)", "🛫", 360, 150], ["entrer", "entré(e)", "🚪", 140, 232], ["sortir", "sorti(e)", "🏃", 262, 232], ["monter", "monté(e)", "⬆️", 120, 128], ["descendre", "descendu(e)", "⬇️", 280, 128], ["rester", "resté(e)", "🛋️", 200, 162], ["tomber", "tombé(e)", "🍂", 316, 70], ["venir", "venu(e)", "👋", 80, 72], ["aller", "allé(e)", "➡️", 200, 22], ["passer", "passé(e)", "🚶", 40, 22], ["retourner", "retourné(e)", "🔁", 360, 22]];
+      const svg = `<svg class="map-svg etre-svg" viewBox="0 0 400 260"><rect width="400" height="260" fill="#eef6ff"/><path d="M90,110 L200,45 L310,110Z" fill="#e0474f"/><rect x="105" y="110" width="190" height="135" fill="#fff4e0" stroke="#7a5230" stroke-width="3"/><rect x="180" y="185" width="40" height="60" fill="#a0703c"/><rect x="125" y="125" width="40" height="34" fill="#bfe3f5" stroke="#7a5230"/><rect x="235" y="125" width="40" height="34" fill="#bfe3f5" stroke="#7a5230"/><text x="200" y="100" font-size="13" font-weight="900" text-anchor="middle" fill="#fff">ÊTRE</text>${V.map(v => `<g class="mplace" data-say="${v[0]} : il est ${v[1].replace("(e)", "")}" transform="translate(${v[3]},${v[4]})"><rect x="-42" y="-16" width="86" height="32" rx="9" fill="#fff" stroke="#9b4fb0" stroke-width="2"/><text x="-22" y="1" font-size="14" text-anchor="middle" dominant-baseline="central">${v[2]}</text><text x="11" y="-4" font-size="9.5" font-weight="800" text-anchor="middle" fill="#2b2118">${v[0]}</text><text x="11" y="8" font-size="8.5" text-anchor="middle" fill="#9b4fb0">${v[1]}</text></g>`).join("")}</svg>`;
+      return ig(s.title || "🏠 La maison d'être", `<div class="mapwrap">${svg}</div>${s.note ? `<div class="gnote">${tz(s.note)}</div>` : ""}`, "map-fig");
+    }
+  });
   function infoEl(spec) { return INFO[spec.type] ? INFO[spec.type](spec) : h(`<div></div>`); }
 
   /* ---------- interactive widgets ---------- */

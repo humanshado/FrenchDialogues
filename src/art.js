@@ -284,6 +284,24 @@
         `<path d="M320,0 V300" stroke="#fff" stroke-width="6"/>` + win(470, 50, 140, 100, E("🌆", 540, 96, 34)) + E("🛋️", 600, 230, 40),
       front: () => counter(40, 250, "#7a1f2b", ["🎟️", "☎️", "📒"], 24)
     },
+    appartement: {
+      outfit: "suit", oc: "#5b6b7c", noCounter: true,
+      back: () => wall("#f4efe6") + floor("#c9a27a") + win(250, 40, 150, 110, E("🏙️", 325, 95, 40)) + `<rect x="40" y="60" width="70" height="185" rx="3" fill="#e9dcc6" stroke="#a0703c" stroke-width="3"/><circle cx="98" cy="155" r="4" fill="#7a5230"/>` +
+        E("📦", 470, 222, 44) + E("📦", 520, 225, 40) + E("📦", 495, 186, 36) + E("🪴", 600, 215, 40) + `<rect x="440" y="80" width="130" height="80" fill="#fff" stroke="#ccc"/><text x="505" y="105" font-size="11" font-weight="800" text-anchor="middle">ÉTAT DES LIEUX</text><text x="505" y="124" font-size="9" text-anchor="middle">entrée ☐ sortie ☐</text><text x="505" y="142" font-size="9" text-anchor="middle">T2 · 45 m² · 3e étage</text>`,
+      front: () => ""
+    },
+    aeroport: {
+      outfit: "uniform", noCounter: false,
+      back: () => wall("#e6edf3") + floor("#b9c1c8") + `<rect x="0" y="0" width="640" height="34" fill="#1f2a44"/><text x="20" y="23" font-size="15" font-weight="800" fill="#fff">✈️ ENREGISTREMENT · CHECK-IN</text>` +
+        `<rect x="420" y="48" width="200" height="110" rx="6" fill="#1b1b1b"/><text x="430" y="68" font-size="11" fill="#ffcd00" font-family="monospace">DÉPARTS</text>` + [["10:35", "MARRAKECH", "À L'HEURE"], ["11:10", "DAKAR", "RETARDÉ"], ["11:45", "MONTRÉAL", "EMBARQUEMENT"], ["12:20", "BUDAPEST", "À L'HEURE"]].map((r, i) => `<text x="430" y="${88 + i * 18}" font-size="10" fill="#fff" font-family="monospace">${r[0]} ${r[1].padEnd(9, " ")} ${r[2]}</text>`).join("") +
+        win(30, 50, 200, 100, E("🛫", 130, 100, 44)) + E("🧳", 560, 220, 40),
+      front: () => counter(40, 250, "#3a4a5a", ["🛂", "🏷️", "⚖️"], 22)
+    },
+    plage: {
+      outfit: null, noCounter: true,
+      back: () => `<rect width="640" height="300" fill="#bfe3f5"/>` + E("☀️", 580, 40, 40) + `<rect x="0" y="120" width="640" height="60" fill="#3a9bd5"/><path d="M0,130 q40,-8 80,0 t80,0 t80,0 t80,0 t80,0 t80,0 t80,0 t80,0" stroke="#fff" stroke-width="2" fill="none" opacity=".7"/>` + floor("#f2dca6", 175) + E("⛵", 120, 120, 34) + E("⛱️", 560, 200, 60) + E("🏐", 80, 240, 26) + E("🐚", 300, 280, 20),
+      front: () => ""
+    },
     // generic fall-backs
     rue: {
       outfit: null, noCounter: true,

@@ -524,3 +524,20 @@ body:not(.no-gc) .ft-m .ftc{color:var(--m)} body:not(.no-gc) .ft-f .ftc{color:va
 .ag-clock{display:flex;align-items:center;gap:6px}.ag-clock b{font-size:14px;white-space:nowrap}
 .ag-pic{font-size:26px;text-align:center}
 .ckopt{padding:4px}
+/* signs, postcard */
+.signs{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.sign{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center}
+.sg-ic{position:relative;width:62px;height:62px;border-radius:50%;display:grid;place-items:center;border:6px solid #d62839;background:#fff}
+.sign-yes .sg-ic{border-color:#2b59c3;background:#2b59c3}
+.sg-pic{font-size:30px}
+.sg-bar{position:absolute;width:62px;height:6px;background:#d62839;transform:rotate(-45deg);border-radius:3px}
+.sign .fr{font-size:14px}.sign .en{font-size:12px}
+.postcard{width:min(100%,620px);display:grid;grid-template-columns:1.4fr 1fr;background:#fffdf6;color:#2b2118;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,.18);overflow:hidden}
+.pc-left{padding:12px 14px;border-right:2px dashed #ccc;font-family:"Segoe Print","Comic Sans MS",cursive}
+.pc-photo{font-size:40px;display:flex;align-items:center;gap:8px;margin-bottom:6px}.pc-photo span{font-size:13px;font-weight:800;font-family:var(--ui);color:#a0703c}
+.pc-text p{margin:0 0 4px;cursor:pointer;font-size:14px;line-height:1.35}.pc-text .en{display:block;font-size:11px;color:#778;font-family:var(--ui)}
+.pc-text .fr{font-weight:500}
+.pc-right{padding:12px;display:flex;flex-direction:column;justify-content:space-between}
+.pc-stamp{align-self:flex-end;font-size:34px;border:3px dotted #c2508e;padding:4px 8px;border-radius:4px}
+.pc-to{border-top:1px solid #bbb;padding-top:6px;font-size:14px;line-height:1.9}.pc-to div{border-bottom:1px solid #ddd}
+@media (max-width:640px){.postcard{grid-template-columns:1fr}}
